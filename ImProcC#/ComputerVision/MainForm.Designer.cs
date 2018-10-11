@@ -32,10 +32,13 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trackBar1_luminozitate = new System.Windows.Forms.TrackBar();
+            this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_negativizare = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSource
@@ -74,6 +77,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.trackBar1_luminozitate);
             this.panel1.Controls.Add(this.button_negativizare);
             this.panel1.Controls.Add(this.buttonGrayscale);
             this.panel1.Location = new System.Drawing.Point(522, 417);
@@ -82,16 +87,24 @@ namespace ComputerVision
             this.panel1.Size = new System.Drawing.Size(479, 291);
             this.panel1.TabIndex = 3;
             // 
-            // buttonGrayscale
+            // label1
             // 
-            this.buttonGrayscale.Location = new System.Drawing.Point(10, 238);
-            this.buttonGrayscale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonGrayscale.Name = "buttonGrayscale";
-            this.buttonGrayscale.Size = new System.Drawing.Size(112, 35);
-            this.buttonGrayscale.TabIndex = 13;
-            this.buttonGrayscale.Text = "Grayscale";
-            this.buttonGrayscale.UseVisualStyleBackColor = true;
-            this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(186, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 20);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Luminozitate";
+            // 
+            // trackBar1_luminozitate
+            // 
+            this.trackBar1_luminozitate.Location = new System.Drawing.Point(10, 3);
+            this.trackBar1_luminozitate.Maximum = 150;
+            this.trackBar1_luminozitate.Minimum = -150;
+            this.trackBar1_luminozitate.Name = "trackBar1_luminozitate";
+            this.trackBar1_luminozitate.Size = new System.Drawing.Size(450, 69);
+            this.trackBar1_luminozitate.TabIndex = 15;
+            this.trackBar1_luminozitate.ValueChanged += new System.EventHandler(this.trackBar1_luminozitate_ValueChanged);
             // 
             // button_negativizare
             // 
@@ -103,6 +116,17 @@ namespace ComputerVision
             this.button_negativizare.Text = "Negativizare";
             this.button_negativizare.UseVisualStyleBackColor = true;
             this.button_negativizare.Click += new System.EventHandler(this.button_negativizare_Click);
+            // 
+            // buttonGrayscale
+            // 
+            this.buttonGrayscale.Location = new System.Drawing.Point(10, 238);
+            this.buttonGrayscale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonGrayscale.Name = "buttonGrayscale";
+            this.buttonGrayscale.Size = new System.Drawing.Size(112, 35);
+            this.buttonGrayscale.TabIndex = 13;
+            this.buttonGrayscale.Text = "Grayscale";
+            this.buttonGrayscale.UseVisualStyleBackColor = true;
+            this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
             // MainForm
             // 
@@ -117,6 +141,8 @@ namespace ComputerVision
             this.Name = "MainForm";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -130,6 +156,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button buttonGrayscale;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button button_negativizare;
+        private System.Windows.Forms.TrackBar trackBar1_luminozitate;
+        private System.Windows.Forms.Label label1;
     }
 }
 

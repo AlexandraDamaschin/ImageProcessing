@@ -14,7 +14,6 @@ C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\bin
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\bin\Debug\ComputerVision.exe
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\bin\Debug\ComputerVision.pdb
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\bin\Debug\ImageUtil.dll
-C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.csprojAssemblyReference.cache
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.MainForm.resources
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.Properties.Resources.resources
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.csproj.GenerateResource.cache

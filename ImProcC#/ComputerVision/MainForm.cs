@@ -267,6 +267,66 @@ namespace ComputerVision
             workImage.Unlock();
             workImage2.Unlock();
         }
-        
+
+        private void button_egalizare_Click(object sender, EventArgs e)
+        {
+            Color color;
+            workImage.Lock();
+
+            int[] hist = new int[256];
+            int[] histC = new int[256];
+            int[] transf = new int[256];
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    int average = (R + G + B) / 3;
+
+                    /* Posibil sa nu fie initializat cu 0 */
+                    hist[average]++;
+                }
+            }
+
+
+            histC[0] = hist[0];
+            for (int i = 1; i < 256; i++)
+            {
+                histC[i] = histC[i - 1] + hist[i];
+            }
+
+
+            for (int i = 0; i < 256; i++)
+            {
+                transf[i] = (histC[i] * 255) / (workImage.Width * workImage.Height);
+            }
+
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    int intensity = (R + G + B) / 3;
+
+                    Color newColor = Color.FromArgb(transf[intensity], transf[intensity], transf[intensity]);
+                    workImage.SetPixel(i, j, newColor);
+
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
     }
 }

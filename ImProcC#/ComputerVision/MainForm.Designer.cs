@@ -41,6 +41,7 @@ namespace ComputerVision
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_egalizare = new System.Windows.Forms.Button();
             this.button_reflexia = new System.Windows.Forms.Button();
+            this.button_translatia = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -82,6 +83,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_translatia);
             this.panel1.Controls.Add(this.button_reflexia);
             this.panel1.Controls.Add(this.button_egalizare);
             this.panel1.Controls.Add(this.label2);
@@ -178,6 +180,17 @@ namespace ComputerVision
             this.button_reflexia.UseVisualStyleBackColor = true;
             this.button_reflexia.Click += new System.EventHandler(this.button_reflexia_Click);
             // 
+            // button_translatia
+            // 
+            this.button_translatia.Location = new System.Drawing.Point(289, 238);
+            this.button_translatia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_translatia.Name = "button_translatia";
+            this.button_translatia.Size = new System.Drawing.Size(112, 35);
+            this.button_translatia.TabIndex = 21;
+            this.button_translatia.Text = "Translatia";
+            this.button_translatia.UseVisualStyleBackColor = true;
+            this.button_translatia.Click += new System.EventHandler(this.button_translatia_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -213,6 +226,7 @@ namespace ComputerVision
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_egalizare;
         private System.Windows.Forms.Button button_reflexia;
+        private System.Windows.Forms.Button button_translatia;
     }
 }
 

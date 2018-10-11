@@ -328,5 +328,27 @@ namespace ComputerVision
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
         }
+
+        private void button_reflexia_Click(object sender, EventArgs e)
+        {
+            workImage.Lock();
+            workImage2.Lock();
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    int newY = -j + (workImage.Height - 1);
+                    Color newColor = workImage2.GetPixel(i, newY);
+                    workImage.SetPixel(i, j, newColor);
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
     }
 }

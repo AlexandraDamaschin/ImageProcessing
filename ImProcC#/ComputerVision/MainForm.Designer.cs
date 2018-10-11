@@ -40,6 +40,7 @@ namespace ComputerVision
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_egalizare = new System.Windows.Forms.Button();
+            this.button_reflexia = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -81,6 +82,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_reflexia);
             this.panel1.Controls.Add(this.button_egalizare);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.trackBar2_contrast);
@@ -165,6 +167,17 @@ namespace ComputerVision
             this.button_egalizare.UseVisualStyleBackColor = true;
             this.button_egalizare.Click += new System.EventHandler(this.button_egalizare_Click);
             // 
+            // button_reflexia
+            // 
+            this.button_reflexia.Location = new System.Drawing.Point(146, 176);
+            this.button_reflexia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_reflexia.Name = "button_reflexia";
+            this.button_reflexia.Size = new System.Drawing.Size(112, 35);
+            this.button_reflexia.TabIndex = 20;
+            this.button_reflexia.Text = "Reflexia";
+            this.button_reflexia.UseVisualStyleBackColor = true;
+            this.button_reflexia.Click += new System.EventHandler(this.button_reflexia_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -199,6 +212,7 @@ namespace ComputerVision
         private System.Windows.Forms.TrackBar trackBar2_contrast;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_egalizare;
+        private System.Windows.Forms.Button button_reflexia;
     }
 }
 

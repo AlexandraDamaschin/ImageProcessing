@@ -32,6 +32,9 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_translatiaX = new System.Windows.Forms.Button();
+            this.button_reflexia = new System.Windows.Forms.Button();
+            this.button_egalizare = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.trackBar2_contrast = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,9 +42,7 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_egalizare = new System.Windows.Forms.Button();
-            this.button_reflexia = new System.Windows.Forms.Button();
-            this.button_translatia = new System.Windows.Forms.Button();
+            this.button_translatiaY = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -83,7 +84,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button_translatia);
+            this.panel1.Controls.Add(this.button_translatiaY);
+            this.panel1.Controls.Add(this.button_translatiaX);
             this.panel1.Controls.Add(this.button_reflexia);
             this.panel1.Controls.Add(this.button_egalizare);
             this.panel1.Controls.Add(this.label2);
@@ -97,6 +99,39 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(479, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_translatiaX
+            // 
+            this.button_translatiaX.Location = new System.Drawing.Point(289, 238);
+            this.button_translatiaX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_translatiaX.Name = "button_translatiaX";
+            this.button_translatiaX.Size = new System.Drawing.Size(112, 35);
+            this.button_translatiaX.TabIndex = 21;
+            this.button_translatiaX.Text = "TranslatiaX";
+            this.button_translatiaX.UseVisualStyleBackColor = true;
+            this.button_translatiaX.Click += new System.EventHandler(this.button_translatiaX_Click);
+            // 
+            // button_reflexia
+            // 
+            this.button_reflexia.Location = new System.Drawing.Point(146, 176);
+            this.button_reflexia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_reflexia.Name = "button_reflexia";
+            this.button_reflexia.Size = new System.Drawing.Size(112, 35);
+            this.button_reflexia.TabIndex = 20;
+            this.button_reflexia.Text = "Reflexia";
+            this.button_reflexia.UseVisualStyleBackColor = true;
+            this.button_reflexia.Click += new System.EventHandler(this.button_reflexia_Click);
+            // 
+            // button_egalizare
+            // 
+            this.button_egalizare.Location = new System.Drawing.Point(146, 238);
+            this.button_egalizare.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_egalizare.Name = "button_egalizare";
+            this.button_egalizare.Size = new System.Drawing.Size(112, 35);
+            this.button_egalizare.TabIndex = 19;
+            this.button_egalizare.Text = "Egalizare";
+            this.button_egalizare.UseVisualStyleBackColor = true;
+            this.button_egalizare.Click += new System.EventHandler(this.button_egalizare_Click);
             // 
             // label2
             // 
@@ -158,38 +193,16 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_egalizare
+            // button_translatiaY
             // 
-            this.button_egalizare.Location = new System.Drawing.Point(146, 238);
-            this.button_egalizare.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_egalizare.Name = "button_egalizare";
-            this.button_egalizare.Size = new System.Drawing.Size(112, 35);
-            this.button_egalizare.TabIndex = 19;
-            this.button_egalizare.Text = "Egalizare";
-            this.button_egalizare.UseVisualStyleBackColor = true;
-            this.button_egalizare.Click += new System.EventHandler(this.button_egalizare_Click);
-            // 
-            // button_reflexia
-            // 
-            this.button_reflexia.Location = new System.Drawing.Point(146, 176);
-            this.button_reflexia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_reflexia.Name = "button_reflexia";
-            this.button_reflexia.Size = new System.Drawing.Size(112, 35);
-            this.button_reflexia.TabIndex = 20;
-            this.button_reflexia.Text = "Reflexia";
-            this.button_reflexia.UseVisualStyleBackColor = true;
-            this.button_reflexia.Click += new System.EventHandler(this.button_reflexia_Click);
-            // 
-            // button_translatia
-            // 
-            this.button_translatia.Location = new System.Drawing.Point(289, 238);
-            this.button_translatia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_translatia.Name = "button_translatia";
-            this.button_translatia.Size = new System.Drawing.Size(112, 35);
-            this.button_translatia.TabIndex = 21;
-            this.button_translatia.Text = "Translatia";
-            this.button_translatia.UseVisualStyleBackColor = true;
-            this.button_translatia.Click += new System.EventHandler(this.button_translatia_Click);
+            this.button_translatiaY.Location = new System.Drawing.Point(289, 176);
+            this.button_translatiaY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_translatiaY.Name = "button_translatiaY";
+            this.button_translatiaY.Size = new System.Drawing.Size(112, 35);
+            this.button_translatiaY.TabIndex = 22;
+            this.button_translatiaY.Text = "TranslatiaY";
+            this.button_translatiaY.UseVisualStyleBackColor = true;
+            this.button_translatiaY.Click += new System.EventHandler(this.button_translatiaY_Click);
             // 
             // MainForm
             // 
@@ -226,7 +239,8 @@ namespace ComputerVision
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_egalizare;
         private System.Windows.Forms.Button button_reflexia;
-        private System.Windows.Forms.Button button_translatia;
+        private System.Windows.Forms.Button button_translatiaX;
+        private System.Windows.Forms.Button button_translatiaY;
     }
 }
 

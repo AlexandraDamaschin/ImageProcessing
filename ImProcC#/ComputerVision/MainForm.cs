@@ -351,7 +351,7 @@ namespace ComputerVision
             workImage2.Unlock();
         }
 
-        private void button_translatia_Click(object sender, EventArgs e)
+        private void button_translatiaX_Click(object sender, EventArgs e)
         {
             workImage.Lock();
 
@@ -363,6 +363,33 @@ namespace ComputerVision
                     if (newY < workImage.Height)
                     {
                         Color newColor = workImage.GetPixel(i, newY);
+                        workImage.SetPixel(i, j, newColor);
+                    }
+                    else
+                    {
+                        workImage.SetPixel(i, j, Color.Black);
+                    }
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+
+            workImage.Unlock();
+        }
+
+        private void button_translatiaY_Click(object sender, EventArgs e)
+        {
+            workImage.Lock();
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    int newX = i + 50;
+                    if (newX < workImage.Width)
+                    {
+                        Color newColor = workImage.GetPixel(newX, j);
                         workImage.SetPixel(i, j, newColor);
                     }
                     else

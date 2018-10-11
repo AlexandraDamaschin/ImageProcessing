@@ -53,7 +53,31 @@ namespace ComputerVision
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
-            
+
+        }
+
+        private void button_negativizare_Click(object sender, EventArgs e)
+        {
+            Color color;
+
+            workImage.Lock();
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    byte R = color.R;
+                    byte G = color.G;
+                    byte B = color.B;
+
+                    color = Color.FromArgb(255 - R, 255 - G, 255 - B);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
         }
     }
 }

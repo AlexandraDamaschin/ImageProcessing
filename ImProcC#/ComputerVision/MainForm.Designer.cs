@@ -32,12 +32,15 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.trackBar2_contrast = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar1_luminozitate = new System.Windows.Forms.TrackBar();
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,6 +80,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.trackBar2_contrast);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.trackBar1_luminozitate);
             this.panel1.Controls.Add(this.button_negativizare);
@@ -86,6 +91,16 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(479, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // trackBar2_contrast
+            // 
+            this.trackBar2_contrast.Location = new System.Drawing.Point(10, 78);
+            this.trackBar2_contrast.Maximum = 120;
+            this.trackBar2_contrast.Minimum = -120;
+            this.trackBar2_contrast.Name = "trackBar2_contrast";
+            this.trackBar2_contrast.Size = new System.Drawing.Size(450, 69);
+            this.trackBar2_contrast.TabIndex = 17;
+            this.trackBar2_contrast.Scroll += new System.EventHandler(this.trackBar2_contrast_Scroll);
             // 
             // label1
             // 
@@ -128,6 +143,15 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(188, 134);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Contrast";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -142,6 +166,7 @@ namespace ComputerVision
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).EndInit();
             this.ResumeLayout(false);
 
@@ -158,6 +183,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_negativizare;
         private System.Windows.Forms.TrackBar trackBar1_luminozitate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TrackBar trackBar2_contrast;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -95,6 +95,7 @@ namespace ComputerVision
 
             workImage.Lock();
             workImage2.Lock();
+
             for (int i = 0; i < workImage.Width; i++)
             {
                 for (int j = 0; j < workImage.Height; j++)
@@ -151,6 +152,116 @@ namespace ComputerVision
                     workImage.SetPixel(i, j, color);
                 }
             }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
+
+        private void trackBar2_contrast_Scroll(object sender, EventArgs e)
+        {
+            Color color;
+            int delta = trackBar2_contrast.Value;
+
+            workImage.Lock();
+            workImage2.Lock();
+
+            int maxG = -256, maxR = -256, maxB = -256;
+            int minG = 256, minR = 256, minB = 256;
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage2.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    //set max
+                    if (R > maxR)
+                        maxR = R;
+
+                    if (G > maxG)
+                        maxG = G;
+
+                    if (B > maxB)
+                        maxB = B;
+
+                    //set min   
+                    if (R < minR)
+                        maxR = R;
+
+                    if (G < minG)
+                        maxG = G;
+
+                    if (B < minB)
+                        maxB = B;
+
+                    color = Color.FromArgb(R, G, B);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+
+            //calculate a
+            int aR = minR + delta;
+            int aG = minG + delta;
+            int aB = minB + delta;
+
+            //calculate b
+            int bR = maxR - delta;
+            int bG = maxG - delta;
+            int bB = maxB - delta;
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    //set R
+                    R = (bR - aR) * (R - minR) / (maxR - minR) + aR;
+                    if (R > 255)
+                    {
+                        R = 255;
+                    }
+                    else if (R < 0)
+                    {
+                        R = 0;
+                    }
+
+                    //set B
+                    B = (bB - aB) * (B - minB) / (maxB - minB) + aB;
+                    if (B > 255)
+                    {
+                        B = 255;
+                    }
+                    else if (B < 0)
+                    {
+                        B = 0;
+                    }
+
+                    //set G
+                    G = (bG - aG) * (G - minG) / (maxG - minG) + aR;
+                    if (G > 255)
+                    {
+                        G = 255;
+                    }
+                    else if (G < 0)
+                    {
+                        G = 0;
+                    }
+
+                    color = Color.FromArgb(R, G, B);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();

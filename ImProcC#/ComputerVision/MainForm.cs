@@ -419,10 +419,6 @@ namespace ComputerVision
                     byte G = color.G;
                     byte B = color.B;
 
-                    byte average = (byte)((R + G + B) / 3);
-
-                    color = Color.FromArgb(average, average, average);
-
                     workImage.SetPixel(i, j, color);
                 }
             }
@@ -441,9 +437,6 @@ namespace ComputerVision
                 for (int j = 0; j < workImage.Height; j += 2)
                 {
                     color = workImage.GetPixel(i, j);
-                    byte R = color.R;
-                    byte G = color.G;
-                    byte B = color.B;
 
                     workImage.SetPixel(i / 2, j / 2, color);
                 }

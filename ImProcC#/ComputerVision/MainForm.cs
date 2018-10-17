@@ -404,5 +404,72 @@ namespace ComputerVision
 
             workImage.Unlock();
         }
+
+        private void button_Marire_Click(object sender, EventArgs e)
+        {
+            Color color;
+
+            workImage.Lock();
+            for (int i = 0; i < workImage.Width; i += 2)
+            {
+                for (int j = 0; j < workImage.Height; j += 2)
+                {
+                    color = workImage.GetPixel(i, j);
+                    byte R = color.R;
+                    byte G = color.G;
+                    byte B = color.B;
+
+                    byte average = (byte)((R + G + B) / 3);
+
+                    color = Color.FromArgb(average, average, average);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
+
+        private void button_Micsorare_Click(object sender, EventArgs e)
+        {
+            Color color;
+
+            workImage.Lock();
+            for (int i = 0; i < workImage.Width; i += 2)
+            {
+                for (int j = 0; j < workImage.Height; j += 2)
+                {
+                    color = workImage.GetPixel(i, j);
+                    byte R = color.R;
+                    byte G = color.G;
+                    byte B = color.B;
+
+                    workImage.SetPixel(i / 2, j / 2, color);
+                }
+            }
+
+
+            for (int i = 0; i < workImage.Width; i ++)
+            {
+                for (int j = 0; j < workImage.Height; j ++)
+                {
+                    if (!(i < workImage.Width / 2 && j < workImage.Height / 2))
+                        workImage.SetPixel(i, j, Color.Black);
+                }
+            }
+
+            //var image = new Bitmap(workImage.Width, workImage.Height);
+            //using (Graphics graphics = Graphics.FromImage(image2))
+            //{
+            //    using (SolidBrush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
+
+            //        graphics.FillRectangle(brush, 0, 0, image.Width, image.Height);
+            //}
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
     }
 }

@@ -21,3 +21,4 @@ C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.csproj.CopyComplete
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.exe
 C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.pdb
+C:\AlexandraFiles\Faculty\ProcesareImagini-Arpi\Proj\ImProcC#\ComputerVision\obj\Debug\ComputerVision.csprojAssemblyReference.cache

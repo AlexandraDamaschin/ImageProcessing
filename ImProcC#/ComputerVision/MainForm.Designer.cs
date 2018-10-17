@@ -32,6 +32,7 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_translatiaY = new System.Windows.Forms.Button();
             this.button_translatiaX = new System.Windows.Forms.Button();
             this.button_reflexia = new System.Windows.Forms.Button();
             this.button_egalizare = new System.Windows.Forms.Button();
@@ -42,7 +43,8 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_translatiaY = new System.Windows.Forms.Button();
+            this.button_Marire = new System.Windows.Forms.Button();
+            this.button_Micsorare = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -84,6 +86,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_Micsorare);
+            this.panel1.Controls.Add(this.button_Marire);
             this.panel1.Controls.Add(this.button_translatiaY);
             this.panel1.Controls.Add(this.button_translatiaX);
             this.panel1.Controls.Add(this.button_reflexia);
@@ -97,8 +101,19 @@ namespace ComputerVision
             this.panel1.Location = new System.Drawing.Point(522, 417);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(479, 291);
+            this.panel1.Size = new System.Drawing.Size(602, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_translatiaY
+            // 
+            this.button_translatiaY.Location = new System.Drawing.Point(289, 176);
+            this.button_translatiaY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_translatiaY.Name = "button_translatiaY";
+            this.button_translatiaY.Size = new System.Drawing.Size(112, 35);
+            this.button_translatiaY.TabIndex = 22;
+            this.button_translatiaY.Text = "TranslatiaY";
+            this.button_translatiaY.UseVisualStyleBackColor = true;
+            this.button_translatiaY.Click += new System.EventHandler(this.button_translatiaY_Click);
             // 
             // button_translatiaX
             // 
@@ -193,22 +208,33 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_translatiaY
+            // button_Marire
             // 
-            this.button_translatiaY.Location = new System.Drawing.Point(289, 176);
-            this.button_translatiaY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_translatiaY.Name = "button_translatiaY";
-            this.button_translatiaY.Size = new System.Drawing.Size(112, 35);
-            this.button_translatiaY.TabIndex = 22;
-            this.button_translatiaY.Text = "TranslatiaY";
-            this.button_translatiaY.UseVisualStyleBackColor = true;
-            this.button_translatiaY.Click += new System.EventHandler(this.button_translatiaY_Click);
+            this.button_Marire.Location = new System.Drawing.Point(425, 176);
+            this.button_Marire.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Marire.Name = "button_Marire";
+            this.button_Marire.Size = new System.Drawing.Size(112, 35);
+            this.button_Marire.TabIndex = 23;
+            this.button_Marire.Text = "Marire";
+            this.button_Marire.UseVisualStyleBackColor = true;
+            this.button_Marire.Click += new System.EventHandler(this.button_Marire_Click);
+            // 
+            // button_Micsorare
+            // 
+            this.button_Micsorare.Location = new System.Drawing.Point(425, 238);
+            this.button_Micsorare.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Micsorare.Name = "button_Micsorare";
+            this.button_Micsorare.Size = new System.Drawing.Size(112, 35);
+            this.button_Micsorare.TabIndex = 24;
+            this.button_Micsorare.Text = "Micsorare";
+            this.button_Micsorare.UseVisualStyleBackColor = true;
+            this.button_Micsorare.Click += new System.EventHandler(this.button_Micsorare_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 728);
+            this.ClientSize = new System.Drawing.Size(1137, 728);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.panelDestination);
@@ -241,6 +267,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_reflexia;
         private System.Windows.Forms.Button button_translatiaX;
         private System.Windows.Forms.Button button_translatiaY;
+        private System.Windows.Forms.Button button_Marire;
+        private System.Windows.Forms.Button button_Micsorare;
     }
 }
 

@@ -61,7 +61,6 @@ namespace ComputerVision
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
-
         }
 
         private void button_negativizare_Click(object sender, EventArgs e)
@@ -410,21 +409,24 @@ namespace ComputerVision
             Color color;
 
             workImage.Lock();
-            for (int i = 0; i < workImage.Width; i += 2)
+            workImage2.Lock();
+            for (int i = 0; i < (workImage.Width / 2); i++)
             {
-                for (int j = 0; j < workImage.Height; j += 2)
+                for (int j = 0; j < (workImage.Height / 2); j++)
                 {
-                    color = workImage.GetPixel(i, j);
-                    byte R = color.R;
-                    byte G = color.G;
-                    byte B = color.B;
+                    color = workImage2.GetPixel(i, j);
+                    workImage.SetPixel(i * 2, j * 2, color);
+                    workImage.SetPixel((i * 2) + 1, j * 2, color);
+                    workImage.SetPixel(i * 2, (j * 2) + 1, color);
+                    workImage.SetPixel((i * 2) + 1, (j * 2) + 1, color);
 
-                    workImage.SetPixel(i, j, color);
                 }
             }
+
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
+            workImage2.Unlock();
         }
 
         private void button_Micsorare_Click(object sender, EventArgs e)
@@ -443,9 +445,9 @@ namespace ComputerVision
             }
 
 
-            for (int i = 0; i < workImage.Width; i ++)
+            for (int i = 0; i < workImage.Width; i++)
             {
-                for (int j = 0; j < workImage.Height; j ++)
+                for (int j = 0; j < workImage.Height; j++)
                 {
                     if (!(i < workImage.Width / 2 && j < workImage.Height / 2))
                         workImage.SetPixel(i, j, Color.Black);
@@ -460,6 +462,34 @@ namespace ComputerVision
             //        graphics.FillRectangle(brush, 0, 0, image.Width, image.Height);
             //}
 
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
+
+        private void button_Rotatia_Click(object sender, EventArgs e)
+        {
+            int rotatie = Int32.Parse(textBox_Rotatie.Text);
+
+            Color color;
+
+            workImage.Lock();
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    byte R = color.R;
+                    byte G = color.G;
+                    byte B = color.B;
+
+                    byte average = (byte)((R + G + B) / 3);
+
+                    color = Color.FromArgb(average, average, average);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();

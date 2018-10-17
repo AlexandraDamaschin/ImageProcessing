@@ -45,6 +45,8 @@ namespace ComputerVision
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_Marire = new System.Windows.Forms.Button();
             this.button_Micsorare = new System.Windows.Forms.Button();
+            this.button_Rotatia = new System.Windows.Forms.Button();
+            this.textBox_Rotatie = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -86,6 +88,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBox_Rotatie);
+            this.panel1.Controls.Add(this.button_Rotatia);
             this.panel1.Controls.Add(this.button_Micsorare);
             this.panel1.Controls.Add(this.button_Marire);
             this.panel1.Controls.Add(this.button_translatiaY);
@@ -101,7 +105,7 @@ namespace ComputerVision
             this.panel1.Location = new System.Drawing.Point(522, 417);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(602, 291);
+            this.panel1.Size = new System.Drawing.Size(715, 291);
             this.panel1.TabIndex = 3;
             // 
             // button_translatiaY
@@ -230,11 +234,29 @@ namespace ComputerVision
             this.button_Micsorare.UseVisualStyleBackColor = true;
             this.button_Micsorare.Click += new System.EventHandler(this.button_Micsorare_Click);
             // 
+            // button_Rotatia
+            // 
+            this.button_Rotatia.Location = new System.Drawing.Point(486, 15);
+            this.button_Rotatia.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Rotatia.Name = "button_Rotatia";
+            this.button_Rotatia.Size = new System.Drawing.Size(112, 35);
+            this.button_Rotatia.TabIndex = 25;
+            this.button_Rotatia.Text = "Rotatia";
+            this.button_Rotatia.UseVisualStyleBackColor = true;
+            this.button_Rotatia.Click += new System.EventHandler(this.button_Rotatia_Click);
+            // 
+            // textBox_Rotatie
+            // 
+            this.textBox_Rotatie.Location = new System.Drawing.Point(622, 19);
+            this.textBox_Rotatie.Name = "textBox_Rotatie";
+            this.textBox_Rotatie.Size = new System.Drawing.Size(56, 26);
+            this.textBox_Rotatie.TabIndex = 26;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1137, 728);
+            this.ClientSize = new System.Drawing.Size(1250, 728);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.panelDestination);
@@ -269,6 +291,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_translatiaY;
         private System.Windows.Forms.Button button_Marire;
         private System.Windows.Forms.Button button_Micsorare;
+        private System.Windows.Forms.Button button_Rotatia;
+        private System.Windows.Forms.TextBox textBox_Rotatie;
     }
 }
 

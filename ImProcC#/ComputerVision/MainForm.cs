@@ -419,7 +419,6 @@ namespace ComputerVision
                     workImage.SetPixel((i * 2) + 1, j * 2, color);
                     workImage.SetPixel(i * 2, (j * 2) + 1, color);
                     workImage.SetPixel((i * 2) + 1, (j * 2) + 1, color);
-
                 }
             }
 
@@ -469,30 +468,68 @@ namespace ComputerVision
 
         private void button_Rotatia_Click(object sender, EventArgs e)
         {
-            int rotatie = Int32.Parse(textBox_Rotatie.Text);
-
-            Color color;
-
             workImage.Lock();
+            workImage2.Lock();
+            float unghi = float.Parse(textBox_Rotatie.Text);
+            double unghiRad = (double.Parse(textBox_Rotatie.Text) * Math.PI / 180);
+            bool[,] testMat = new bool[workImage.Width, workImage.Height];
+
+            int x0 = workImage.Width / 2, y0 = workImage.Height / 2;
+
             for (int i = 0; i < workImage.Width; i++)
             {
                 for (int j = 0; j < workImage.Height; j++)
                 {
-                    color = workImage.GetPixel(i, j);
-                    byte R = color.R;
-                    byte G = color.G;
-                    byte B = color.B;
 
-                    byte average = (byte)((R + G + B) / 3);
+                    workImage.SetPixel(i, j, Color.Black);
 
-                    color = Color.FromArgb(average, average, average);
 
-                    workImage.SetPixel(i, j, color);
                 }
             }
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    Color newColor = workImage2.GetPixel(i, j);
+                    int x2 = (int)(Math.Cos(unghiRad) * (i - x0) - Math.Sin(unghiRad) * (j - y0) + x0);
+                    int y2 = (int)(Math.Sin(unghiRad) * (i - x0) + Math.Cos(unghiRad) * (j - y0) + y0);
+
+                    if (!(x2 < 0 || x2 >= workImage.Width || y2 < 0 || y2 >= workImage.Height))
+                    {
+                        testMat[x2, y2] = true;
+                        workImage.SetPixel(x2, y2, newColor);
+                    }
+                }
+            }
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    if (testMat[i, j] == false)
+                    {
+                        int x = i, y = j;
+                        Color color1 = workImage.GetPixel(i - 1, j + 1);
+                        Color color2 = workImage.GetPixel(i + 1, j - 1);
+                        Color color3 = workImage.GetPixel(i + 1, j + 1);
+                        Color color4 = workImage.GetPixel(i - 1, j - 1);
+                        int R = (color1.R + color2.R + color3.R + color4.R) / 4;
+                        int G = (color1.G + color2.G + color3.G + color4.G) / 4;
+                        int B = (color1.B + color2.B + color3.B + color4.B) / 4;
+
+
+                        Color colorNew = Color.FromArgb(R, G, B);
+
+                        workImage.SetPixel(i, j, colorNew);
+                    }
+                }
+            }
+
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
+            workImage2.Unlock();
         }
     }
 }

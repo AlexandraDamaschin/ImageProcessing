@@ -535,6 +535,7 @@ namespace ComputerVision
         private void button_FTJ_Click(object sender, EventArgs e)
         {
             Color color;
+            workImage.Lock();
 
             int n = int.Parse(textBox_FTJ.Text);
 
@@ -543,7 +544,6 @@ namespace ComputerVision
             { n, n*n ,n},
             { 1, n ,1}};
 
-            workImage.Lock();
 
             for (int i = 1; i < workImage.Width - 1; i++)
             {
@@ -582,7 +582,58 @@ namespace ComputerVision
 
         private void button_Outlier_Click(object sender, EventArgs e)
         {
+            Color color;
+            workImage.Lock();
+            int prag = int.Parse(textBox_outlier.Text);
 
+            int[,] h = new int[,]
+            { { 1, 1 ,1},
+            { 1, 0 ,1},
+            { 1, 1 ,1}};
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    int sumR = 0, sumG = 0, sumB = 0;
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            color = workImage.GetPixel(k, l);
+                            int R = color.R;
+                            int G = color.G;
+                            int B = color.B;
+
+                            sumR += h[k - i + 1, l - j + 1] * R;
+                            sumB += h[k - i + 1, l - j + 1] * B;
+                            sumG += h[k - i + 1, l - j + 1] * G;
+                        }
+                    }
+
+                    int medieR, medieG, medieB;
+                    medieR = sumR / 8;
+                    medieG = sumG / 8;
+                    medieB = sumB / 8;
+
+                    color = workImage.GetPixel(i, j);
+                    int intR = color.R;
+                    int intG = color.G;
+                    int intB = color.B;
+
+                    if (Math.Abs(intR - medieR) > prag &&
+                        Math.Abs(intG - medieG) > prag &&
+                        Math.Abs(intB - medieB) > prag)
+                    {
+                        color = Color.FromArgb(medieR, medieG, medieB);
+                        workImage.SetPixel(i, j, color);
+                    }
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
         }
     }
 }

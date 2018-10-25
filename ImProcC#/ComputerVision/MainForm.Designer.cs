@@ -51,6 +51,7 @@ namespace ComputerVision
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_Outlier = new System.Windows.Forms.Button();
             this.textBox_outlier = new System.Windows.Forms.TextBox();
+            this.button_pseudomedian = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -92,6 +93,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_pseudomedian);
             this.panel1.Controls.Add(this.textBox_outlier);
             this.panel1.Controls.Add(this.button_Outlier);
             this.panel1.Controls.Add(this.textBox_FTJ);
@@ -296,6 +298,17 @@ namespace ComputerVision
             this.textBox_outlier.Size = new System.Drawing.Size(56, 26);
             this.textBox_outlier.TabIndex = 30;
             // 
+            // button_pseudomedian
+            // 
+            this.button_pseudomedian.Location = new System.Drawing.Point(566, 176);
+            this.button_pseudomedian.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_pseudomedian.Name = "button_pseudomedian";
+            this.button_pseudomedian.Size = new System.Drawing.Size(127, 35);
+            this.button_pseudomedian.TabIndex = 31;
+            this.button_pseudomedian.Text = "Pseudomedian";
+            this.button_pseudomedian.UseVisualStyleBackColor = true;
+            this.button_pseudomedian.Click += new System.EventHandler(this.button_pseudomedian_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -341,6 +354,7 @@ namespace ComputerVision
         private System.Windows.Forms.TextBox textBox_FTJ;
         private System.Windows.Forms.Button button_Outlier;
         private System.Windows.Forms.TextBox textBox_outlier;
+        private System.Windows.Forms.Button button_pseudomedian;
     }
 }
 

@@ -634,5 +634,79 @@ namespace ComputerVision
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
         }
+
+        private void button_pseudomedian_Click(object sender, EventArgs e)
+        {
+            Color color;
+            workImage.Lock();
+
+            int[,] h = new int[,]
+            { { 1, 1 ,1},
+            { 1, 0 ,1},
+            { 1, 1 ,1}};
+
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    Color colorA, colorB, colorC, colorD, colorE;
+
+                    colorA = workImage.GetPixel(i - 1, j);
+                    colorB = workImage.GetPixel(i, j - 1);
+                    colorC = workImage.GetPixel(i, j);
+                    colorD = workImage.GetPixel(i, j + 1);
+                    colorE = workImage.GetPixel(i + 1, j);
+
+                    #region RED
+                    float min1R, min2R, min3R;
+                    min1R = Math.Min(Math.Min(colorA.R, colorB.R), colorC.R);
+                    min2R = Math.Min(Math.Min(colorC.R, colorB.R), colorD.R);
+                    min3R = Math.Min(Math.Min(colorD.R, colorC.R), colorE.R);
+
+                    float max1R, max2R, max3R;
+                    max1R = Math.Max(Math.Max(colorA.R, colorB.R), colorC.R);
+                    max2R = Math.Max(Math.Max(colorC.R, colorB.R), colorD.R);
+                    max3R = Math.Max(Math.Max(colorD.R, colorC.R), colorE.R);
+
+                    double rexR = (Math.Max(min1R, Math.Max(min2R, min3R)) + Math.Min(max1R, Math.Min(max2R, max3R))) / 2;
+                    #endregion
+
+                    #region GREEN
+                    float min1G, min2G, min3G;
+                    min1G = Math.Min(Math.Min(colorA.G, colorB.G), colorC.G);
+                    min2G = Math.Min(Math.Min(colorC.G, colorB.G), colorD.G);
+                    min3G = Math.Min(Math.Min(colorD.G, colorC.G), colorE.G);
+
+                    float max1G, max2G, max3G;
+                    max1G = Math.Max(Math.Max(colorA.G, colorB.G), colorC.G);
+                    max2G = Math.Max(Math.Max(colorC.G, colorB.G), colorD.G);
+                    max3G = Math.Max(Math.Max(colorD.G, colorC.G), colorE.G);
+
+                    double rexG = (Math.Max(min1G, Math.Max(min2G, min3G)) + Math.Min(max1G, Math.Min(max2G, max3G))) / 2;
+                    #endregion
+
+                    #region BLUE
+                    float min1B, min2B, min3B;
+                    min1B = Math.Min(Math.Min(colorA.B, colorB.B), colorC.B);
+                    min2B = Math.Min(Math.Min(colorC.B, colorB.B), colorD.B);
+                    min3B = Math.Min(Math.Min(colorD.B, colorC.B), colorE.B);
+
+                    float max1B, max2B, max3B;
+                    max1B = Math.Max(Math.Max(colorA.B, colorB.B), colorC.B);
+                    max2B = Math.Max(Math.Max(colorC.B, colorB.B), colorD.B);
+                    max3B = Math.Max(Math.Max(colorD.B, colorC.B), colorE.B);
+
+                    double rexB = (Math.Max(min1B, Math.Max(min2B, min3B)) + Math.Min(max1B, Math.Min(max2B, max3B))) / 2;
+                    #endregion
+
+                    color = Color.FromArgb((int)rexR, (int)rexG, (int)rexB);
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
     }
 }

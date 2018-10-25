@@ -52,6 +52,7 @@ namespace ComputerVision
             this.button_Outlier = new System.Windows.Forms.Button();
             this.textBox_outlier = new System.Windows.Forms.TextBox();
             this.button_pseudomedian = new System.Windows.Forms.Button();
+            this.button_median = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -93,6 +94,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_median);
             this.panel1.Controls.Add(this.button_pseudomedian);
             this.panel1.Controls.Add(this.textBox_outlier);
             this.panel1.Controls.Add(this.button_Outlier);
@@ -300,7 +302,7 @@ namespace ComputerVision
             // 
             // button_pseudomedian
             // 
-            this.button_pseudomedian.Location = new System.Drawing.Point(566, 176);
+            this.button_pseudomedian.Location = new System.Drawing.Point(566, 238);
             this.button_pseudomedian.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_pseudomedian.Name = "button_pseudomedian";
             this.button_pseudomedian.Size = new System.Drawing.Size(127, 35);
@@ -308,6 +310,17 @@ namespace ComputerVision
             this.button_pseudomedian.Text = "Pseudomedian";
             this.button_pseudomedian.UseVisualStyleBackColor = true;
             this.button_pseudomedian.Click += new System.EventHandler(this.button_pseudomedian_Click);
+            // 
+            // button_median
+            // 
+            this.button_median.Location = new System.Drawing.Point(566, 176);
+            this.button_median.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_median.Name = "button_median";
+            this.button_median.Size = new System.Drawing.Size(127, 35);
+            this.button_median.TabIndex = 32;
+            this.button_median.Text = "Median";
+            this.button_median.UseVisualStyleBackColor = true;
+            this.button_median.Click += new System.EventHandler(this.button_median_Click);
             // 
             // MainForm
             // 
@@ -355,6 +368,7 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_Outlier;
         private System.Windows.Forms.TextBox textBox_outlier;
         private System.Windows.Forms.Button button_pseudomedian;
+        private System.Windows.Forms.Button button_median;
     }
 }
 

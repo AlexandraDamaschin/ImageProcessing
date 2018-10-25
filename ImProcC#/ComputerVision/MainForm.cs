@@ -635,6 +635,91 @@ namespace ComputerVision
             workImage.Unlock();
         }
 
+        private void button_median_Click(object sender, EventArgs e)
+        {
+            Color color;
+            workImage.Lock();
+
+            int[,] h = new int[,]
+            { { 1, 1 ,1},
+            { 1, 0 ,1},
+            { 1, 1 ,1}};
+
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+
+                    Color colorA = workImage.GetPixel(i - 1, j);
+                    Color colorB = workImage.GetPixel(i, j - 1);
+                    Color colorC = workImage.GetPixel(i, j);
+                    Color colorD = workImage.GetPixel(i, j + 1);
+                    Color colorE = workImage.GetPixel(i + 1, j);
+
+                    #region RED
+                    float min1R, min2R, min3R, min4R, min5R, min6R, min7R, min8R, min9R, min10R;
+                    min1R = Math.Min(Math.Min(colorA.R, colorB.R), colorC.R);
+                    min2R = Math.Min(Math.Min(colorA.R, colorB.R), colorD.R);
+                    min3R = Math.Min(Math.Min(colorA.R, colorB.R), colorE.R);
+                    min4R = Math.Min(Math.Min(colorA.R, colorC.R), colorD.R);
+                    min5R = Math.Min(Math.Min(colorA.R, colorE.R), colorC.R);
+                    min6R = Math.Min(Math.Min(colorA.R, colorD.R), colorE.R);
+                    min7R = Math.Min(Math.Min(colorD.R, colorB.R), colorC.R);
+                    min8R = Math.Min(Math.Min(colorE.R, colorB.R), colorC.R);
+                    min9R = Math.Min(Math.Min(colorE.R, colorB.R), colorD.R);
+                    min10R = Math.Min(Math.Min(colorC.R, colorD.R), colorE.R);
+
+                    float maxR = Math.Max(min1R, Math.Max(min2R, Math.Max(min3R, Math.Max(min4R,
+                         Math.Max(min5R, Math.Max(min6R, Math.Max(min7R, Math.Max(min8R,
+                         Math.Max(min9R, min10R)))))))));
+                    #endregion
+
+                    #region GREEN
+                    float min1G, min2G, min3G, min4G, min5G, min6G, min7G, min8G, min9G, min10G;
+                    min1G = Math.Min(Math.Min(colorA.G, colorB.G), colorC.G);
+                    min2G = Math.Min(Math.Min(colorA.G, colorB.G), colorD.G);
+                    min3G = Math.Min(Math.Min(colorA.G, colorB.G), colorE.G);
+                    min4G = Math.Min(Math.Min(colorA.G, colorC.G), colorD.G);
+                    min5G = Math.Min(Math.Min(colorA.G, colorE.G), colorC.G);
+                    min6G = Math.Min(Math.Min(colorA.G, colorD.G), colorE.G);
+                    min7G = Math.Min(Math.Min(colorD.G, colorB.G), colorC.G);
+                    min8G = Math.Min(Math.Min(colorE.G, colorB.G), colorC.G);
+                    min9G = Math.Min(Math.Min(colorE.G, colorB.G), colorD.G);
+                    min10G = Math.Min(Math.Min(colorC.G, colorD.G), colorE.G);
+
+                    float maxG = Math.Max(min1G, Math.Max(min2G, Math.Max(min3G, Math.Max(min4G,
+                         Math.Max(min5G, Math.Max(min6G, Math.Max(min7G, Math.Max(min8G,
+                         Math.Max(min9G, min10G)))))))));
+                    #endregion
+
+                    #region blue
+                    float min1B, min2B, min3B, min4B, min5B, min6B, min7B, min8B, min9B, min10B;
+                    min1B = Math.Min(Math.Min(colorA.B, colorB.B), colorC.B);
+                    min2B = Math.Min(Math.Min(colorA.B, colorB.B), colorD.B);
+                    min3B = Math.Min(Math.Min(colorA.B, colorB.B), colorE.B);
+                    min4B = Math.Min(Math.Min(colorA.B, colorC.B), colorD.B);
+                    min5B = Math.Min(Math.Min(colorA.B, colorE.B), colorC.B);
+                    min6B = Math.Min(Math.Min(colorA.B, colorD.B), colorE.B);
+                    min7B = Math.Min(Math.Min(colorD.B, colorB.B), colorC.B);
+                    min8B = Math.Min(Math.Min(colorE.B, colorB.B), colorC.B);
+                    min9B = Math.Min(Math.Min(colorE.B, colorB.B), colorD.B);
+                    min10B = Math.Min(Math.Min(colorC.B, colorD.B), colorE.B);
+
+                    float maxB = Math.Max(min1B, Math.Max(min2B, Math.Max(min3B, Math.Max(min4B,
+                         Math.Max(min5B, Math.Max(min6B, Math.Max(min7B, Math.Max(min8B,
+                         Math.Max(min9B, min10B)))))))));
+                    #endregion
+
+                    color = Color.FromArgb((int)maxR, (int)maxG, (int)maxB);
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
+
         private void button_pseudomedian_Click(object sender, EventArgs e)
         {
             Color color;
@@ -651,7 +736,6 @@ namespace ComputerVision
                 for (int j = 1; j < workImage.Height - 1; j++)
                 {
                     Color colorA, colorB, colorC, colorD, colorE;
-
                     colorA = workImage.GetPixel(i - 1, j);
                     colorB = workImage.GetPixel(i, j - 1);
                     colorC = workImage.GetPixel(i, j);
@@ -669,7 +753,7 @@ namespace ComputerVision
                     max2R = Math.Max(Math.Max(colorC.R, colorB.R), colorD.R);
                     max3R = Math.Max(Math.Max(colorD.R, colorC.R), colorE.R);
 
-                    double rexR = (Math.Max(min1R, Math.Max(min2R, min3R)) + Math.Min(max1R, Math.Min(max2R, max3R))) / 2;
+                    double pmedR = (Math.Max(min1R, Math.Max(min2R, min3R)) + Math.Min(max1R, Math.Min(max2R, max3R))) / 2;
                     #endregion
 
                     #region GREEN
@@ -683,7 +767,7 @@ namespace ComputerVision
                     max2G = Math.Max(Math.Max(colorC.G, colorB.G), colorD.G);
                     max3G = Math.Max(Math.Max(colorD.G, colorC.G), colorE.G);
 
-                    double rexG = (Math.Max(min1G, Math.Max(min2G, min3G)) + Math.Min(max1G, Math.Min(max2G, max3G))) / 2;
+                    double pmedG = (Math.Max(min1G, Math.Max(min2G, min3G)) + Math.Min(max1G, Math.Min(max2G, max3G))) / 2;
                     #endregion
 
                     #region BLUE
@@ -697,10 +781,10 @@ namespace ComputerVision
                     max2B = Math.Max(Math.Max(colorC.B, colorB.B), colorD.B);
                     max3B = Math.Max(Math.Max(colorD.B, colorC.B), colorE.B);
 
-                    double rexB = (Math.Max(min1B, Math.Max(min2B, min3B)) + Math.Min(max1B, Math.Min(max2B, max3B))) / 2;
+                    double pmedB = (Math.Max(min1B, Math.Max(min2B, min3B)) + Math.Min(max1B, Math.Min(max2B, max3B))) / 2;
                     #endregion
 
-                    color = Color.FromArgb((int)rexR, (int)rexG, (int)rexB);
+                    color = Color.FromArgb((int)pmedR, (int)pmedG, (int)pmedB);
                     workImage.SetPixel(i, j, color);
                 }
             }

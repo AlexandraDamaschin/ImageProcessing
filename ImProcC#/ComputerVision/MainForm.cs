@@ -645,12 +645,10 @@ namespace ComputerVision
             { 1, 0 ,1},
             { 1, 1 ,1}};
 
-
             for (int i = 1; i < workImage.Width - 1; i++)
             {
                 for (int j = 1; j < workImage.Height - 1; j++)
                 {
-
                     Color colorA = workImage.GetPixel(i - 1, j);
                     Color colorB = workImage.GetPixel(i, j - 1);
                     Color colorC = workImage.GetPixel(i, j);
@@ -729,7 +727,6 @@ namespace ComputerVision
             { { 1, 1 ,1},
             { 1, 0 ,1},
             { 1, 1 ,1}};
-
 
             for (int i = 1; i < workImage.Width - 1; i++)
             {

@@ -839,10 +839,8 @@ namespace ComputerVision
                             }
                         }
                     }
-
                     Color colorNew = Color.FromArgb(vectR[4], vectG[4], vectB[4]);
                     workImage.SetPixel(i, j, colorNew);
-
                 }
             }
             panelDestination.BackgroundImage = null;
@@ -866,6 +864,8 @@ namespace ComputerVision
                     int B = color.B;
 
                     int sumR = 0, sumG = 0, sumB = 0;
+
+                    //RED
                     sumR += -(workImage.GetPixel(i, j - 1).R +
                               workImage.GetPixel(i, j + 1).R +
                               workImage.GetPixel(i - 1, j).R +
@@ -881,6 +881,7 @@ namespace ComputerVision
                     else if (sumR > 255)
                         sumR = 255;
 
+                    //GREEN
                     sumG += -(workImage.GetPixel(i, j - 1).G +
                               workImage.GetPixel(i, j + 1).G +
                               workImage.GetPixel(i - 1, j).G +
@@ -896,6 +897,7 @@ namespace ComputerVision
                     else if (sumG > 255)
                         sumG = 255;
 
+                    //BLUE
                     sumB += -(workImage.GetPixel(i, j - 1).B +
                               workImage.GetPixel(i, j + 1).B +
                               workImage.GetPixel(i - 1, j).B +

@@ -55,6 +55,7 @@ namespace ComputerVision
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_filtruZgomot = new System.Windows.Forms.Button();
             this.button_FTS = new System.Windows.Forms.Button();
+            this.button_unsharpMasking = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -96,6 +97,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_unsharpMasking);
             this.panel1.Controls.Add(this.button_FTS);
             this.panel1.Controls.Add(this.button_filtruZgomot);
             this.panel1.Controls.Add(this.button_median);
@@ -348,6 +350,17 @@ namespace ComputerVision
             this.button_FTS.UseVisualStyleBackColor = true;
             this.button_FTS.Click += new System.EventHandler(this.button_FTS_Click);
             // 
+            // button_unsharpMasking
+            // 
+            this.button_unsharpMasking.Location = new System.Drawing.Point(717, 15);
+            this.button_unsharpMasking.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_unsharpMasking.Name = "button_unsharpMasking";
+            this.button_unsharpMasking.Size = new System.Drawing.Size(127, 35);
+            this.button_unsharpMasking.TabIndex = 35;
+            this.button_unsharpMasking.Text = "Unsharp Masking";
+            this.button_unsharpMasking.UseVisualStyleBackColor = true;
+            this.button_unsharpMasking.Click += new System.EventHandler(this.button_unsharpMasking_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -397,6 +410,7 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_median;
         private System.Windows.Forms.Button button_filtruZgomot;
         private System.Windows.Forms.Button button_FTS;
+        private System.Windows.Forms.Button button_unsharpMasking;
     }
 }
 

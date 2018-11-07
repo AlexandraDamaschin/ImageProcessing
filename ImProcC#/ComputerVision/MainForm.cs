@@ -1014,7 +1014,83 @@ namespace ComputerVision
 
         private void button_Kirsch_Click(object sender, EventArgs e)
         {
+            Color color;
+            workImage.Lock();
+            workImage2.Lock();
 
+            int[,] H1 = { { -1, 0, -1 }, { -1, 0, -1 }, { -1, 0, -1 } };
+            int[,] H2 = { { 1, 1, 1 }, { 0, 0, 0 }, { -1, -1, -1 } };
+            int[,] H3 = { { 0, 0, 1 }, { -1, 0, -1 }, { -1, -1, 0 } };
+            int[,] H4 = { { 1, 1, 0 }, { 1, 0, -1 }, { 0, -1, -1 } };
+
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    int sumR = 0, sumG = 0, sumB = 0;
+
+                    //RED
+                    sumR += -(workImage.GetPixel(i, j - 1).R +
+                              workImage.GetPixel(i, j + 1).R +
+                              workImage.GetPixel(i - 1, j).R +
+                              workImage.GetPixel(i + 1, j).R +
+                              workImage.GetPixel(i - 1, j - 1).R +
+                              workImage.GetPixel(i - 1, j + 1).R +
+                              workImage.GetPixel(i + 1, j - 1).R +
+                              workImage.GetPixel(i + 1, j + 1).R);
+                    sumR += 9 * R;
+
+                    if (sumR < 0)
+                        sumR = 0;
+                    else if (sumR > 255)
+                        sumR = 255;
+
+                    //GREEN
+                    sumG += -(workImage.GetPixel(i, j - 1).G +
+                              workImage.GetPixel(i, j + 1).G +
+                              workImage.GetPixel(i - 1, j).G +
+                              workImage.GetPixel(i + 1, j).G +
+                              workImage.GetPixel(i - 1, j - 1).G +
+                              workImage.GetPixel(i - 1, j + 1).G +
+                              workImage.GetPixel(i + 1, j - 1).G +
+                              workImage.GetPixel(i + 1, j + 1).G);
+                    sumG += 9 * G;
+
+                    if (sumG < 0)
+                        sumG = 0;
+                    else if (sumG > 255)
+                        sumG = 255;
+
+                    //BLUE
+                    sumB += -(workImage.GetPixel(i, j - 1).B +
+                              workImage.GetPixel(i, j + 1).B +
+                              workImage.GetPixel(i - 1, j).B +
+                              workImage.GetPixel(i + 1, j).B +
+                              workImage.GetPixel(i - 1, j - 1).B +
+                              workImage.GetPixel(i - 1, j + 1).B +
+                              workImage.GetPixel(i + 1, j - 1).B +
+                              workImage.GetPixel(i + 1, j + 1).B);
+                    sumB += 9 * B;
+
+                    if (sumB < 0)
+                        sumB = 0;
+                    else if (sumB > 255)
+                        sumB = 255;
+
+                    color = Color.FromArgb((byte)sumR, (byte)sumG, (byte)sumB);
+                    workImage2.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
         }
     }
 }

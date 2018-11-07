@@ -792,58 +792,57 @@ namespace ComputerVision
 
         private void button_filtruZgomot_Click(object sender, EventArgs e)
         {
-            Color color;
-
             workImage.Lock();
 
-            List<int> listR = new List<int>();
-            List<int> listB = new List<int>();
-            List<int> listG = new List<int>();
-
-            for (int i = 0; i < workImage.Width - 1; i++)
+            for (int i = 1; i < workImage.Width - 1; i++)
             {
-                for (int j = 0; j < workImage.Height - 1; j++)
+                for (int j = 1; j < workImage.Height - 1; j++)
                 {
-                    listR.Clear();
-                    listG.Clear();
-                    listG.Clear();
+                    int index = 0;
+                    int[] vectR = new int[9];
+                    int[] vectG = new int[9];
+                    int[] vectB = new int[9];
 
-                    listR.Add(workImage.GetPixel(i - 1, j - 1).R);
-                    listR.Add(workImage.GetPixel(i + 1, j + 1).R);
-                    listR.Add(workImage.GetPixel(i - 1, j + 1).R);
-                    listR.Add(workImage.GetPixel(i + 1, j - 1).R);
-                    listR.Add(workImage.GetPixel(i, j - 1).R);
-                    listR.Add(workImage.GetPixel(i, j + 1).R);
-                    listR.Add(workImage.GetPixel(i - 1, j).R);
-                    listR.Add(workImage.GetPixel(i + 1, j).R);
-                    listR.Add(workImage.GetPixel(i, j).R);
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            Color newColor = workImage.GetPixel(k, l);
+                            vectR[index] = newColor.R;
+                            vectG[index] = newColor.G;
+                            vectB[index] = newColor.B;
+                            index++;
+                        }
+                    }
 
-                    listG.Add(workImage.GetPixel(i - 1, j - 1).G);
-                    listG.Add(workImage.GetPixel(i + 1, j + 1).G);
-                    listG.Add(workImage.GetPixel(i - 1, j + 1).G);
-                    listG.Add(workImage.GetPixel(i + 1, j - 1).G);
-                    listG.Add(workImage.GetPixel(i, j - 1).G);
-                    listG.Add(workImage.GetPixel(i, j + 1).G);
-                    listG.Add(workImage.GetPixel(i - 1, j).G);
-                    listG.Add(workImage.GetPixel(i + 1, j).G);
-                    listG.Add(workImage.GetPixel(i, j).G);
+                    for (int k = 0; k < 9 - 1; k++)
+                    {
+                        for (int l = k + 1; l < 9; l++)
+                        {
+                            if (vectB[k] < vectB[l])
+                            {
+                                int temp = vectB[k];
+                                vectB[k] = vectB[l];
+                                vectB[l] = temp;
+                            }
+                            if (vectG[k] < vectG[l])
+                            {
+                                int temp = vectG[k];
+                                vectG[k] = vectG[l];
+                                vectG[l] = temp;
+                            }
+                            if (vectR[k] < vectR[l])
+                            {
+                                int temp = vectR[k];
+                                vectR[k] = vectR[l];
+                                vectR[l] = temp;
+                            }
+                        }
+                    }
 
-                    listB.Add(workImage.GetPixel(i - 1, j - 1).B);
-                    listB.Add(workImage.GetPixel(i + 1, j + 1).B);
-                    listB.Add(workImage.GetPixel(i - 1, j + 1).B);
-                    listB.Add(workImage.GetPixel(i + 1, j - 1).B);
-                    listB.Add(workImage.GetPixel(i, j - 1).B);
-                    listB.Add(workImage.GetPixel(i, j + 1).B);
-                    listB.Add(workImage.GetPixel(i - 1, j).B);
-                    listB.Add(workImage.GetPixel(i + 1, j).B);
-                    listB.Add(workImage.GetPixel(i, j).B);
+                    Color colorNew = Color.FromArgb(vectR[4], vectG[4], vectB[4]);
+                    workImage.SetPixel(i, j, colorNew);
 
-                    listR.Sort();
-                    listG.Sort();
-                    listB.Sort();
-
-                    color = Color.FromArgb((byte)listR[4], (byte)listG[4], (byte)listB[4]);
-                    workImage.SetPixel(i, j, color);
                 }
             }
             panelDestination.BackgroundImage = null;

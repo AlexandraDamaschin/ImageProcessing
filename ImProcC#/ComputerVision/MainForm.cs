@@ -789,5 +789,113 @@ namespace ComputerVision
             panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
         }
+
+        private void button_filtruZgomot_Click(object sender, EventArgs e)
+        {
+            List<int> listR = new List<int>();
+            List<int> listB = new List<int>();
+            List<int> listG = new List<int>();
+
+            Color color;
+
+            workImage.Lock();
+            
+            for (int i = 0; i < workImage.Width - 1; i++)
+            {
+                for (int j = 0; j < workImage.Height - 1; j++)
+                {
+                    listR.Clear();
+                    listG.Clear();
+                    listG.Clear();
+
+                    listR.Add(workImage.GetPixel(i - 1, j - 1).R);
+                    listR.Add(workImage.GetPixel(i + 1, j + 1).R);
+                    listR.Add(workImage.GetPixel(i - 1, j + 1).R);
+                    listR.Add(workImage.GetPixel(i + 1, j - 1).R);
+                    listR.Add(workImage.GetPixel(i, j - 1).R);
+                    listR.Add(workImage.GetPixel(i, j + 1).R);
+                    listR.Add(workImage.GetPixel(i - 1, j).R);
+                    listR.Add(workImage.GetPixel(i + 1, j).R);
+                    listR.Add(workImage.GetPixel(i, j).R);
+
+                    listG.Add(workImage.GetPixel(i - 1, j - 1).G);
+                    listG.Add(workImage.GetPixel(i + 1, j + 1).G);
+                    listG.Add(workImage.GetPixel(i - 1, j + 1).G);
+                    listG.Add(workImage.GetPixel(i + 1, j - 1).G);
+                    listG.Add(workImage.GetPixel(i, j - 1).G);
+                    listG.Add(workImage.GetPixel(i, j + 1).G);
+                    listG.Add(workImage.GetPixel(i - 1, j).G);
+                    listG.Add(workImage.GetPixel(i + 1, j).G);
+                    listG.Add(workImage.GetPixel(i, j).G);
+
+                    listB.Add(workImage.GetPixel(i - 1, j - 1).B);
+                    listB.Add(workImage.GetPixel(i + 1, j + 1).B);
+                    listB.Add(workImage.GetPixel(i - 1, j + 1).B);
+                    listB.Add(workImage.GetPixel(i + 1, j - 1).B);
+                    listB.Add(workImage.GetPixel(i, j - 1).B);
+                    listB.Add(workImage.GetPixel(i, j + 1).B);
+                    listB.Add(workImage.GetPixel(i - 1, j).B);
+                    listB.Add(workImage.GetPixel(i + 1, j).B);
+                    listB.Add(workImage.GetPixel(i, j).B);
+
+                    listR.Sort();
+                    listG.Sort();
+                    listB.Sort();
+
+                    color = Color.FromArgb((byte)listR[4], (byte)listG[4], (byte)listB[4]);
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
+
+        private void button_FTS_Click(object sender, EventArgs e)
+        {
+            Color color;
+            workImage.Lock();
+
+            int n = int.Parse(textBox_FTJ.Text);
+
+            int[,] h = new int[,]
+            { { 1, n ,1},
+            { n, n*n ,n},
+            { 1, n ,1}};
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    int sumR = 0, sumG = 0, sumB = 0;
+
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            color = workImage.GetPixel(k, l);
+                            byte R = color.R;
+                            byte G = color.G;
+                            byte B = color.B;
+
+                            sumB += h[k - i + 1, l - j + 1] * B;
+                            sumG += h[k - i + 1, l - j + 1] * G;
+                            sumR += h[k - i + 1, l - j + 1] * R;
+                        }
+                    }
+
+                    int medieR = sumR / ((n + 2) * (n + 2));
+                    int medieG = sumG / ((n + 2) * (n + 2));
+                    int medieB = sumB / ((n + 2) * (n + 2));
+
+                    color = Color.FromArgb(medieR, medieG, medieB);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
     }
 }

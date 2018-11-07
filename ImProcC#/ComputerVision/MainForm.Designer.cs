@@ -32,6 +32,10 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_median = new System.Windows.Forms.Button();
+            this.button_pseudomedian = new System.Windows.Forms.Button();
+            this.textBox_outlier = new System.Windows.Forms.TextBox();
+            this.button_Outlier = new System.Windows.Forms.Button();
             this.textBox_FTJ = new System.Windows.Forms.TextBox();
             this.button_FTJ = new System.Windows.Forms.Button();
             this.textBox_Rotatie = new System.Windows.Forms.TextBox();
@@ -49,10 +53,8 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_Outlier = new System.Windows.Forms.Button();
-            this.textBox_outlier = new System.Windows.Forms.TextBox();
-            this.button_pseudomedian = new System.Windows.Forms.Button();
-            this.button_median = new System.Windows.Forms.Button();
+            this.button_filtruZgomot = new System.Windows.Forms.Button();
+            this.button_FTS = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -94,6 +96,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_FTS);
+            this.panel1.Controls.Add(this.button_filtruZgomot);
             this.panel1.Controls.Add(this.button_median);
             this.panel1.Controls.Add(this.button_pseudomedian);
             this.panel1.Controls.Add(this.textBox_outlier);
@@ -117,8 +121,48 @@ namespace ComputerVision
             this.panel1.Location = new System.Drawing.Point(522, 417);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(715, 291);
+            this.panel1.Size = new System.Drawing.Size(854, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_median
+            // 
+            this.button_median.Location = new System.Drawing.Point(566, 176);
+            this.button_median.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_median.Name = "button_median";
+            this.button_median.Size = new System.Drawing.Size(127, 35);
+            this.button_median.TabIndex = 32;
+            this.button_median.Text = "Median";
+            this.button_median.UseVisualStyleBackColor = true;
+            this.button_median.Click += new System.EventHandler(this.button_median_Click);
+            // 
+            // button_pseudomedian
+            // 
+            this.button_pseudomedian.Location = new System.Drawing.Point(566, 238);
+            this.button_pseudomedian.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_pseudomedian.Name = "button_pseudomedian";
+            this.button_pseudomedian.Size = new System.Drawing.Size(127, 35);
+            this.button_pseudomedian.TabIndex = 31;
+            this.button_pseudomedian.Text = "Pseudomedian";
+            this.button_pseudomedian.UseVisualStyleBackColor = true;
+            this.button_pseudomedian.Click += new System.EventHandler(this.button_pseudomedian_Click);
+            // 
+            // textBox_outlier
+            // 
+            this.textBox_outlier.Location = new System.Drawing.Point(622, 116);
+            this.textBox_outlier.Name = "textBox_outlier";
+            this.textBox_outlier.Size = new System.Drawing.Size(56, 26);
+            this.textBox_outlier.TabIndex = 30;
+            // 
+            // button_Outlier
+            // 
+            this.button_Outlier.Location = new System.Drawing.Point(486, 112);
+            this.button_Outlier.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Outlier.Name = "button_Outlier";
+            this.button_Outlier.Size = new System.Drawing.Size(112, 35);
+            this.button_Outlier.TabIndex = 29;
+            this.button_Outlier.Text = "Outlier";
+            this.button_Outlier.UseVisualStyleBackColor = true;
+            this.button_Outlier.Click += new System.EventHandler(this.button_Outlier_Click);
             // 
             // textBox_FTJ
             // 
@@ -282,51 +326,33 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_Outlier
+            // button_filtruZgomot
             // 
-            this.button_Outlier.Location = new System.Drawing.Point(486, 112);
-            this.button_Outlier.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_Outlier.Name = "button_Outlier";
-            this.button_Outlier.Size = new System.Drawing.Size(112, 35);
-            this.button_Outlier.TabIndex = 29;
-            this.button_Outlier.Text = "Outlier";
-            this.button_Outlier.UseVisualStyleBackColor = true;
-            this.button_Outlier.Click += new System.EventHandler(this.button_Outlier_Click);
+            this.button_filtruZgomot.Location = new System.Drawing.Point(717, 176);
+            this.button_filtruZgomot.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_filtruZgomot.Name = "button_filtruZgomot";
+            this.button_filtruZgomot.Size = new System.Drawing.Size(127, 35);
+            this.button_filtruZgomot.TabIndex = 33;
+            this.button_filtruZgomot.Text = "Filtru zgomot";
+            this.button_filtruZgomot.UseVisualStyleBackColor = true;
+            this.button_filtruZgomot.Click += new System.EventHandler(this.button_filtruZgomot_Click);
             // 
-            // textBox_outlier
+            // button_FTS
             // 
-            this.textBox_outlier.Location = new System.Drawing.Point(622, 116);
-            this.textBox_outlier.Name = "textBox_outlier";
-            this.textBox_outlier.Size = new System.Drawing.Size(56, 26);
-            this.textBox_outlier.TabIndex = 30;
-            // 
-            // button_pseudomedian
-            // 
-            this.button_pseudomedian.Location = new System.Drawing.Point(566, 238);
-            this.button_pseudomedian.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_pseudomedian.Name = "button_pseudomedian";
-            this.button_pseudomedian.Size = new System.Drawing.Size(127, 35);
-            this.button_pseudomedian.TabIndex = 31;
-            this.button_pseudomedian.Text = "Pseudomedian";
-            this.button_pseudomedian.UseVisualStyleBackColor = true;
-            this.button_pseudomedian.Click += new System.EventHandler(this.button_pseudomedian_Click);
-            // 
-            // button_median
-            // 
-            this.button_median.Location = new System.Drawing.Point(566, 176);
-            this.button_median.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_median.Name = "button_median";
-            this.button_median.Size = new System.Drawing.Size(127, 35);
-            this.button_median.TabIndex = 32;
-            this.button_median.Text = "Median";
-            this.button_median.UseVisualStyleBackColor = true;
-            this.button_median.Click += new System.EventHandler(this.button_median_Click);
+            this.button_FTS.Location = new System.Drawing.Point(717, 238);
+            this.button_FTS.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_FTS.Name = "button_FTS";
+            this.button_FTS.Size = new System.Drawing.Size(127, 35);
+            this.button_FTS.TabIndex = 34;
+            this.button_FTS.Text = "Filtru FTS";
+            this.button_FTS.UseVisualStyleBackColor = true;
+            this.button_FTS.Click += new System.EventHandler(this.button_FTS_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 728);
+            this.ClientSize = new System.Drawing.Size(1385, 728);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.panelDestination);
@@ -369,6 +395,8 @@ namespace ComputerVision
         private System.Windows.Forms.TextBox textBox_outlier;
         private System.Windows.Forms.Button button_pseudomedian;
         private System.Windows.Forms.Button button_median;
+        private System.Windows.Forms.Button button_filtruZgomot;
+        private System.Windows.Forms.Button button_FTS;
     }
 }
 

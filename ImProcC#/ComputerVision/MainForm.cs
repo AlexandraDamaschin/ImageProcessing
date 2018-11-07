@@ -925,7 +925,91 @@ namespace ComputerVision
 
         private void button_unsharpMasking_Click(object sender, EventArgs e)
         {
+            Color color;
+            workImage.Lock();
+            workImage2.Lock();
 
+            float c = 0.6f;
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int R = color.R;
+                    int G = color.G;
+                    int B = color.B;
+
+                    int sumR = 0, sumG = 0, sumB = 0;
+
+                    //RED
+                    sumR += (workImage.GetPixel(i, j - 1).R +
+                             workImage.GetPixel(i, j + 1).R +
+                             workImage.GetPixel(i - 1, j).R +
+                             workImage.GetPixel(i + 1, j).R);
+
+                    sumR += (workImage.GetPixel(i - 1, j - 1).R +
+                             workImage.GetPixel(i - 1, j + 1).R +
+                             workImage.GetPixel(i + 1, j - 1).R +
+                             workImage.GetPixel(i + 1, j + 1).R);
+                    sumR += R;
+                    sumR = sumR / 9;
+
+                    sumR = (int)((c * R - (1 - c) * sumR) / (2 * c - 1));
+
+                    //GREEN
+                    sumG += (workImage.GetPixel(i, j - 1).G +
+                            workImage.GetPixel(i, j + 1).G +
+                            workImage.GetPixel(i - 1, j).G +
+                            workImage.GetPixel(i + 1, j).G);
+
+                    sumG += (workImage.GetPixel(i - 1, j - 1).G +
+                             workImage.GetPixel(i - 1, j + 1).G +
+                             workImage.GetPixel(i + 1, j - 1).G +
+                             workImage.GetPixel(i + 1, j + 1).G);
+                    sumG += G;
+                    sumG = sumG / 9;
+
+                    sumG = (int)((c * G - (1 - c) * sumG) / (2 * c - 1));
+
+                    //BLUE
+                    sumB += (workImage.GetPixel(i, j - 1).B +
+                             workImage.GetPixel(i, j + 1).B +
+                             workImage.GetPixel(i - 1, j).B +
+                             workImage.GetPixel(i + 1, j).B);
+
+                    sumB += (workImage.GetPixel(i - 1, j - 1).B +
+                             workImage.GetPixel(i - 1, j + 1).B +
+                             workImage.GetPixel(i + 1, j - 1).B +
+                             workImage.GetPixel(i + 1, j + 1).B);
+                    sumB += B;
+                    sumB = sumB / 9;
+
+                    sumB = (int)((c * B - (1 - c) * sumB) / (2 * c - 1));
+
+                    if (sumR < 0)
+                        sumR = 0;
+                    else if (sumR > 255)
+                        sumR = 255;
+
+                    if (sumG < 0)
+                        sumG = 0;
+                    else if (sumG > 255)
+                        sumG = 255;
+
+                    if (sumB < 0)
+                        sumB = 0;
+                    else if (sumB > 255)
+                        sumB = 255;
+
+                    color = Color.FromArgb((byte)sumR, (byte)sumG, (byte)sumB);
+                    workImage2.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
         }
     }
 }

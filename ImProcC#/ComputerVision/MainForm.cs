@@ -1014,81 +1014,83 @@ namespace ComputerVision
 
         private void button_Kirsch_Click(object sender, EventArgs e)
         {
-            Color color;
             workImage.Lock();
             workImage2.Lock();
 
             int[,] H1 = { { -1, 0, -1 }, { -1, 0, -1 }, { -1, 0, -1 } };
             int[,] H2 = { { 1, 1, 1 }, { 0, 0, 0 }, { -1, -1, -1 } };
-            int[,] H3 = { { 0, 0, 1 }, { -1, 0, -1 }, { -1, -1, 0 } };
+            int[,] H3 = { { 0, 1, 1 }, { -1, 0, 1 }, { -1, -1, 0 } };
             int[,] H4 = { { 1, 1, 0 }, { 1, 0, -1 }, { 0, -1, -1 } };
-
 
             for (int i = 1; i < workImage.Width - 1; i++)
             {
                 for (int j = 1; j < workImage.Height - 1; j++)
                 {
-                    color = workImage.GetPixel(i, j);
-                    int R = color.R;
-                    int G = color.G;
-                    int B = color.B;
+                    int sumR1 = 0, sumB1 = 0, sumG1 = 0;
+                    int sumR2 = 0, sumB2 = 0, sumG2 = 0;
+                    int sumR3 = 0, sumB3 = 0, sumG3 = 0;
+                    int sumR4 = 0, sumB4 = 0, sumG4 = 0;
 
-                    int sumR = 0, sumG = 0, sumB = 0;
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            Color newColor = workImage2.GetPixel(k, l);
+                            sumR1 += newColor.R * H1[i - k + 1, j - l + 1];
+                            sumG1 += newColor.G * H1[i - k + 1, j - l + 1];
+                            sumB1 += newColor.B * H1[i - k + 1, j - l + 1];
 
-                    //RED
-                    sumR += -(workImage.GetPixel(i, j - 1).R +
-                              workImage.GetPixel(i, j + 1).R +
-                              workImage.GetPixel(i - 1, j).R +
-                              workImage.GetPixel(i + 1, j).R +
-                              workImage.GetPixel(i - 1, j - 1).R +
-                              workImage.GetPixel(i - 1, j + 1).R +
-                              workImage.GetPixel(i + 1, j - 1).R +
-                              workImage.GetPixel(i + 1, j + 1).R);
-                    sumR += 9 * R;
+                            sumR2 += newColor.R * H2[i - k + 1, j - l + 1];
+                            sumG2 += newColor.G * H2[i - k + 1, j - l + 1];
+                            sumB2 += newColor.B * H2[i - k + 1, j - l + 1];
+
+                            sumR3 += newColor.R * H3[i - k + 1, j - l + 1];
+                            sumG3 += newColor.G * H3[i - k + 1, j - l + 1];
+                            sumB3 += newColor.B * H3[i - k + 1, j - l + 1];
+
+                            sumR4 += newColor.R * H4[i - k + 1, j - l + 1];
+                            sumG4 += newColor.G * H4[i - k + 1, j - l + 1];
+                            sumB4 += newColor.B * H4[i - k + 1, j - l + 1];
+                        }
+                    }
+
+                    int sumR = Math.Max(sumR1, Math.Max(sumR2, Math.Max(sumR3, sumR4)));
+                    int sumG = Math.Max(sumG1, Math.Max(sumG2, Math.Max(sumG3, sumG4)));
+                    int sumB = Math.Max(sumB1, Math.Max(sumB2, Math.Max(sumB3, sumB4)));
 
                     if (sumR < 0)
+                    {
                         sumR = 0;
+                    }
                     else if (sumR > 255)
+                    {
                         sumR = 255;
-
-                    //GREEN
-                    sumG += -(workImage.GetPixel(i, j - 1).G +
-                              workImage.GetPixel(i, j + 1).G +
-                              workImage.GetPixel(i - 1, j).G +
-                              workImage.GetPixel(i + 1, j).G +
-                              workImage.GetPixel(i - 1, j - 1).G +
-                              workImage.GetPixel(i - 1, j + 1).G +
-                              workImage.GetPixel(i + 1, j - 1).G +
-                              workImage.GetPixel(i + 1, j + 1).G);
-                    sumG += 9 * G;
+                    }
 
                     if (sumG < 0)
+                    {
                         sumG = 0;
+                    }
                     else if (sumG > 255)
+                    {
                         sumG = 255;
-
-                    //BLUE
-                    sumB += -(workImage.GetPixel(i, j - 1).B +
-                              workImage.GetPixel(i, j + 1).B +
-                              workImage.GetPixel(i - 1, j).B +
-                              workImage.GetPixel(i + 1, j).B +
-                              workImage.GetPixel(i - 1, j - 1).B +
-                              workImage.GetPixel(i - 1, j + 1).B +
-                              workImage.GetPixel(i + 1, j - 1).B +
-                              workImage.GetPixel(i + 1, j + 1).B);
-                    sumB += 9 * B;
+                    }
 
                     if (sumB < 0)
+                    {
                         sumB = 0;
+                    }
                     else if (sumB > 255)
+                    {
                         sumB = 255;
+                    }
 
-                    color = Color.FromArgb((byte)sumR, (byte)sumG, (byte)sumB);
-                    workImage2.SetPixel(i, j, color);
+                    Color colorNew = Color.FromArgb(sumR, sumG, sumB);
+                    workImage.SetPixel(i, j, colorNew);
                 }
             }
             panelDestination.BackgroundImage = null;
-            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            panelDestination.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
             workImage2.Unlock();
         }

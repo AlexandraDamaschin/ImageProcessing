@@ -1011,5 +1011,10 @@ namespace ComputerVision
             workImage.Unlock();
             workImage2.Unlock();
         }
+
+        private void button_Kirsch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

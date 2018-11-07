@@ -32,6 +32,9 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_unsharpMasking = new System.Windows.Forms.Button();
+            this.button_FTS = new System.Windows.Forms.Button();
+            this.button_filtruZgomot = new System.Windows.Forms.Button();
             this.button_median = new System.Windows.Forms.Button();
             this.button_pseudomedian = new System.Windows.Forms.Button();
             this.textBox_outlier = new System.Windows.Forms.TextBox();
@@ -53,9 +56,7 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_filtruZgomot = new System.Windows.Forms.Button();
-            this.button_FTS = new System.Windows.Forms.Button();
-            this.button_unsharpMasking = new System.Windows.Forms.Button();
+            this.button_Kirsch = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -97,6 +98,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_Kirsch);
             this.panel1.Controls.Add(this.button_unsharpMasking);
             this.panel1.Controls.Add(this.button_FTS);
             this.panel1.Controls.Add(this.button_filtruZgomot);
@@ -125,6 +127,39 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(854, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_unsharpMasking
+            // 
+            this.button_unsharpMasking.Location = new System.Drawing.Point(717, 15);
+            this.button_unsharpMasking.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_unsharpMasking.Name = "button_unsharpMasking";
+            this.button_unsharpMasking.Size = new System.Drawing.Size(127, 35);
+            this.button_unsharpMasking.TabIndex = 35;
+            this.button_unsharpMasking.Text = "Unsharp Masking";
+            this.button_unsharpMasking.UseVisualStyleBackColor = true;
+            this.button_unsharpMasking.Click += new System.EventHandler(this.button_unsharpMasking_Click);
+            // 
+            // button_FTS
+            // 
+            this.button_FTS.Location = new System.Drawing.Point(717, 238);
+            this.button_FTS.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_FTS.Name = "button_FTS";
+            this.button_FTS.Size = new System.Drawing.Size(127, 35);
+            this.button_FTS.TabIndex = 34;
+            this.button_FTS.Text = "Filtru FTS";
+            this.button_FTS.UseVisualStyleBackColor = true;
+            this.button_FTS.Click += new System.EventHandler(this.button_FTS_Click);
+            // 
+            // button_filtruZgomot
+            // 
+            this.button_filtruZgomot.Location = new System.Drawing.Point(717, 176);
+            this.button_filtruZgomot.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_filtruZgomot.Name = "button_filtruZgomot";
+            this.button_filtruZgomot.Size = new System.Drawing.Size(127, 35);
+            this.button_filtruZgomot.TabIndex = 33;
+            this.button_filtruZgomot.Text = "Filtru zgomot";
+            this.button_filtruZgomot.UseVisualStyleBackColor = true;
+            this.button_filtruZgomot.Click += new System.EventHandler(this.button_filtruZgomot_Click);
             // 
             // button_median
             // 
@@ -328,38 +363,16 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_filtruZgomot
+            // button_Kirsch
             // 
-            this.button_filtruZgomot.Location = new System.Drawing.Point(717, 176);
-            this.button_filtruZgomot.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_filtruZgomot.Name = "button_filtruZgomot";
-            this.button_filtruZgomot.Size = new System.Drawing.Size(127, 35);
-            this.button_filtruZgomot.TabIndex = 33;
-            this.button_filtruZgomot.Text = "Filtru zgomot";
-            this.button_filtruZgomot.UseVisualStyleBackColor = true;
-            this.button_filtruZgomot.Click += new System.EventHandler(this.button_filtruZgomot_Click);
-            // 
-            // button_FTS
-            // 
-            this.button_FTS.Location = new System.Drawing.Point(717, 238);
-            this.button_FTS.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_FTS.Name = "button_FTS";
-            this.button_FTS.Size = new System.Drawing.Size(127, 35);
-            this.button_FTS.TabIndex = 34;
-            this.button_FTS.Text = "Filtru FTS";
-            this.button_FTS.UseVisualStyleBackColor = true;
-            this.button_FTS.Click += new System.EventHandler(this.button_FTS_Click);
-            // 
-            // button_unsharpMasking
-            // 
-            this.button_unsharpMasking.Location = new System.Drawing.Point(717, 15);
-            this.button_unsharpMasking.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_unsharpMasking.Name = "button_unsharpMasking";
-            this.button_unsharpMasking.Size = new System.Drawing.Size(127, 35);
-            this.button_unsharpMasking.TabIndex = 35;
-            this.button_unsharpMasking.Text = "Unsharp Masking";
-            this.button_unsharpMasking.UseVisualStyleBackColor = true;
-            this.button_unsharpMasking.Click += new System.EventHandler(this.button_unsharpMasking_Click);
+            this.button_Kirsch.Location = new System.Drawing.Point(717, 60);
+            this.button_Kirsch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Kirsch.Name = "button_Kirsch";
+            this.button_Kirsch.Size = new System.Drawing.Size(127, 35);
+            this.button_Kirsch.TabIndex = 36;
+            this.button_Kirsch.Text = "Kirsch";
+            this.button_Kirsch.UseVisualStyleBackColor = true;
+            this.button_Kirsch.Click += new System.EventHandler(this.button_Kirsch_Click);
             // 
             // MainForm
             // 
@@ -411,6 +424,7 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_filtruZgomot;
         private System.Windows.Forms.Button button_FTS;
         private System.Windows.Forms.Button button_unsharpMasking;
+        private System.Windows.Forms.Button button_Kirsch;
     }
 }
 

@@ -1094,5 +1094,334 @@ namespace ComputerVision
             workImage.Unlock();
             workImage2.Unlock();
         }
+
+        private void button_Sobel_Click(object sender, EventArgs e)
+        {
+            workImage.Lock();
+            workImage2.Lock();
+
+            int[,] P = { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
+            int[,] Q = { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    int sumR1 = 0, sumB1 = 0, sumG1 = 0;
+                    int sumR2 = 0, sumB2 = 0, sumG2 = 0;
+
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            Color newColor = workImage2.GetPixel(k, l);
+                            sumR1 += newColor.R * P[i - k + 1, j - l + 1];
+                            sumG1 += newColor.G * P[i - k + 1, j - l + 1];
+                            sumB1 += newColor.B * P[i - k + 1, j - l + 1];
+
+                            sumR2 += newColor.R * Q[i - k + 1, j - l + 1];
+                            sumG2 += newColor.G * Q[i - k + 1, j - l + 1];
+                            sumB2 += newColor.B * Q[i - k + 1, j - l + 1];
+                        }
+                    }
+
+                    double sumR = Math.Sqrt((sumR1 * sumR1) + (sumR2 * sumR2));
+                    double sumG = Math.Sqrt((sumG1 * sumG1) + (sumG2 * sumG2));
+                    double sumB = Math.Sqrt((sumB1 * sumB1) + (sumB2 * sumB2));
+
+                    if (sumR < 0)
+                    {
+                        sumR = 0;
+                    }
+                    else if (sumR > 255)
+                    {
+                        sumR = 255;
+                    }
+
+                    if (sumG < 0)
+                    {
+                        sumG = 0;
+                    }
+                    else if (sumG > 255)
+                    {
+                        sumG = 255;
+                    }
+
+                    if (sumB < 0)
+                    {
+                        sumB = 0;
+                    }
+                    else if (sumB > 255)
+                    {
+                        sumB = 255;
+                    }
+
+                    Color colorNew = Color.FromArgb((int)sumR, (int)sumG, (int)sumB);
+                    workImage.SetPixel(i, j, colorNew);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
+
+        private void button_Frei_Chen_Click(object sender, EventArgs e)
+        {
+            workImage.Lock();
+            workImage2.Lock();
+            double radical2 = Math.Sqrt(2);
+
+            double[,] F1 = { { 1, radical2, 1 }, { 0, 0, 0 }, { -1, -radical2, -1 } };
+            double[,] F2 = { { -1, 0, 1 }, { radical2, 0, -radical2 }, { 1, 0, -1 } };
+            double[,] F3 = { { 0, -1, radical2 }, { 1, 0, -1 }, { -radical2, 1, 0 } };
+            double[,] F4 = { { radical2, -1, 0 }, { -1, 0, 1 }, { 0, 1, -radical2 } };
+            double[,] F5 = { { 0, 1, 0 }, { -1, 0, -1 }, { 0, 1, 0 } };
+            double[,] F6 = { { -1, 0, 1 }, { 0, 0, 0 }, { 1, 0, -1 } };
+            double[,] F7 = { { 1, -2, 1 }, { -2, 4, -2 }, { 1, -2, 1 } };
+            double[,] F8 = { { -2, 1, -2 }, { 1, 4, 1 }, { -2, 1, -2 } };
+            double[,] F9 = { { 0.11, 0.11, 0.11 }, { 0.11, 0.11, 0.11 }, { 0.11, 0.11, 0.11 } };
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    double sumR1 = 0, sumB1 = 0, sumG1 = 0;
+                    double sumR2 = 0, sumB2 = 0, sumG2 = 0;
+                    double sumR3 = 0, sumB3 = 0, sumG3 = 0;
+                    double sumR4 = 0, sumB4 = 0, sumG4 = 0;
+                    double sumR5 = 0, sumB5 = 0, sumG5 = 0;
+                    double sumR6 = 0, sumB6 = 0, sumG6 = 0;
+                    double sumR7 = 0, sumB7 = 0, sumG7 = 0;
+                    double sumR8 = 0, sumB8 = 0, sumG8 = 0;
+                    double sumR9 = 0, sumB9 = 0, sumG9 = 0;
+
+                    for (int k = i - 1; k <= i + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            Color newColor = workImage2.GetPixel(k, l);
+
+                            //1
+                            sumR1 += newColor.R * F1[i - k + 1, j - l + 1];
+                            sumG1 += newColor.G * F1[i - k + 1, j - l + 1];
+                            sumB1 += newColor.B * F1[i - k + 1, j - l + 1];
+
+                            //2
+                            sumR2 += newColor.R * F2[i - k + 1, j - l + 1];
+                            sumG2 += newColor.G * F2[i - k + 1, j - l + 1];
+                            sumB2 += newColor.B * F2[i - k + 1, j - l + 1];
+
+                            //3
+                            sumR3 += newColor.R * F3[i - k + 1, j - l + 1];
+                            sumG3 += newColor.G * F3[i - k + 1, j - l + 1];
+                            sumB3 += newColor.B * F3[i - k + 1, j - l + 1];
+
+                            //4
+                            sumR4 += newColor.R * F4[i - k + 1, j - l + 1];
+                            sumG4 += newColor.G * F4[i - k + 1, j - l + 1];
+                            sumB4 += newColor.B * F4[i - k + 1, j - l + 1];
+
+                            //5
+                            sumR5 += newColor.R * F5[i - k + 1, j - l + 1];
+                            sumG5 += newColor.G * F5[i - k + 1, j - l + 1];
+                            sumB5 += newColor.B * F5[i - k + 1, j - l + 1];
+
+                            //6
+                            sumR6 += newColor.R * F6[i - k + 1, j - l + 1];
+                            sumG6 += newColor.G * F6[i - k + 1, j - l + 1];
+                            sumB6 += newColor.B * F6[i - k + 1, j - l + 1];
+
+                            //7
+                            sumR7 += newColor.R * F7[i - k + 1, j - l + 1];
+                            sumG7 += newColor.G * F7[i - k + 1, j - l + 1];
+                            sumB7 += newColor.B * F7[i - k + 1, j - l + 1];
+
+                            //8
+                            sumR8 += newColor.R * F8[i - k + 1, j - l + 1];
+                            sumG8 += newColor.G * F8[i - k + 1, j - l + 1];
+                            sumB8 += newColor.B * F8[i - k + 1, j - l + 1];
+
+                            //9
+                            sumR9 += (int)(newColor.R * F9[i - k + 1, j - l + 1]);
+                            sumG9 += (int)(newColor.G * F9[i - k + 1, j - l + 1]);
+                            sumB9 += (int)(newColor.B * F9[i - k + 1, j - l + 1]);
+                        }
+                    }
+
+                    //RED
+                    int sumR = (int)(Math.Sqrt((sumR1 * sumR1 + sumR2 * sumR2 + sumR3 * sumR3 + sumR4 * sumR4) /
+                        (sumR1 * sumR1 + sumR2 * sumR2 + sumR3 * sumR3 + sumR4 * sumR4 + sumR5 * sumR5 +
+                        sumR6 * sumR6 + sumR7 * sumR7 + sumR8 * sumR8 + sumR9 * sumR9)) * 255);
+
+                    //GREEN
+                    int sumG = (int)(Math.Sqrt((sumG1 * sumG1 + sumG2 * sumG2 + sumG3 * sumG3 + sumG4 * sumG4) /
+                        (sumG1 * sumG1 + sumG2 * sumG2 + sumG3 * sumG3 + sumG4 * sumG4 + sumG5 * sumG5 +
+                        sumG6 * sumG6 + sumG7 * sumG7 + sumG8 * sumG8 + sumG9 * sumG9)) * 255);
+
+                    //BLUE
+                    int sumB = (int)(Math.Sqrt((sumB1 * sumB1 + sumB2 * sumB2 + sumB3 * sumB3 + sumB4 * sumB4) /
+                        (sumB1 * sumB1 + sumB2 * sumB2 + sumB3 * sumB3 + sumB4 * sumB4 + sumB5 * sumB5 +
+                        sumB6 * sumB6 + sumB7 * sumB7 + sumB8 * sumB8 + sumB9 * sumB9)) * 255);
+
+                    if (sumR < 0)
+                    {
+                        sumR = 0;
+                    }
+                    else if (sumR > 255)
+                    {
+                        sumR = 255;
+                    }
+
+                    if (sumG < 0)
+                    {
+                        sumG = 0;
+                    }
+                    else if (sumG > 255)
+                    {
+                        sumG = 255;
+                    }
+
+                    if (sumB < 0)
+                    {
+                        sumB = 0;
+                    }
+                    else if (sumB > 255)
+                    {
+                        sumB = 255;
+                    }
+
+                    Color colorNew = Color.FromArgb((int)sumR, (int)sumG, (int)sumB);
+                    workImage.SetPixel(i, j, colorNew);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
+
+        private void button_Gabor_Click(object sender, EventArgs e)
+        {
+            double omega = 1.5;
+            Color color;
+            int[,] P = new int[,] { { 1, 1, 1 }, { 0, 0, 0 }, { -1, -1, -1 } };
+            int[,] Q = new int[,] { { -1, 0, 1 }, { -1, 0, 1 }, { -1, 0, 1 } };
+            double sumR, sumG, sumB, scaleR, scaleG, scaleB, uR, uG, uB;
+
+            workImage2.Lock();
+            workImage.Lock();
+
+            for (int i = 1; i < workImage.Width - 1; i++)
+            {
+                for (int j = 1; j < workImage.Height - 1; j++)
+                {
+                    Color[,] vectorCulori = new Color[,]
+                    {
+                        { workImage.GetPixel(i - 1, j - 1), workImage.GetPixel(i, j - 1), workImage.GetPixel(i + 1, j - 1) },
+                        { workImage.GetPixel(i - 1, j), workImage.GetPixel(i, j), workImage.GetPixel(i + 1, j) },
+                        { workImage.GetPixel(i - 1, j + 1), workImage.GetPixel(i, j + 1), workImage.GetPixel(i + 1, j + 1) }
+                    };
+                    int sumaPR = 0, sumaPG = 0, sumaPB = 0, sumaQR = 0, sumaQG = 0, sumaQB = 0;
+
+                    for (int k = 0; k < 3; k++)
+                        for (int l = 0; l < 3; l++)
+                        {
+                            sumaPR += vectorCulori[k, l].R * P[k, l];
+                            sumaPG += vectorCulori[k, l].G * P[k, l];
+                            sumaPB += vectorCulori[k, l].B * P[k, l];
+
+                            sumaQR += vectorCulori[k, l].R * Q[k, l];
+                            sumaQG += vectorCulori[k, l].G * Q[k, l];
+                            sumaQB += vectorCulori[k, l].B * Q[k, l];
+                        }
+
+                    //RED
+                    if (sumaQR == 0)
+                    {
+                        if (sumaPR >= 0)
+                            uR = Math.PI / 2;
+                        else
+                            uR = 0 - (Math.PI / 2);
+                    }
+                    else
+                    {
+                        uR = Math.Atan((sumaPR * 1.0) / (sumaQR * 1.0));
+                        if (sumaQR < 0)
+                            uR += Math.PI;
+                    }
+
+                    //GREEN
+                    if (sumaQG == 0)
+                    {
+                        if (sumaPG >= 0)
+                            uG = Math.PI / 2;
+                        else
+                            uG = 0 - (Math.PI / 2);
+                    }
+                    else
+                    {
+                        uG = Math.Atan((sumaPG * 1.0) / (sumaQG * 1.0));
+                        if (sumaQG < 0)
+                            uG += Math.PI;
+                    }
+
+                    //BLUE
+                    if (sumaQB == 0)
+                    {
+                        if (sumaPB >= 0)
+                            uB = Math.PI / 2;
+                        else
+                            uB = 0 - (Math.PI / 2);
+                    }
+                    else
+                    {
+                        uB = Math.Atan((sumaPB * 1.0) / (sumaQB * 1.0));
+                        if (sumaQB < 0)
+                            uB += Math.PI;
+                    }
+
+                    uR += Math.PI / 2;
+                    uG += Math.PI / 2;
+                    uB += Math.PI / 2;
+
+                    sumR = sumG = sumB = 0;
+
+                    for (int k = 0; k < 3; k++)
+                        for (int l = 0; l < 3; l++)
+                        {
+                            scaleR = Math.Exp(0.0 - ((k * k + l * l) * 1.0) / (2.0 * 0.66 * 0.66)) * Math.Sin(omega * (k * Math.Cos(uR) + l * Math.Sin(uR)));
+                            scaleG = Math.Exp(0.0 - ((k * k + l * l) * 1.0) / (2.0 * 0.66 * 0.66)) * Math.Sin(omega * (k * Math.Cos(uG) + l * Math.Sin(uG)));
+                            scaleB = Math.Exp(0.0 - ((k * k + l * l) * 1.0) / (2.0 * 0.66 * 0.66)) * Math.Sin(omega * (k * Math.Cos(uB) + l * Math.Sin(uB)));
+
+                            sumR += scaleR * vectorCulori[k, l].R;
+                            sumG += scaleG * vectorCulori[k, l].G;
+                            sumB += scaleB * vectorCulori[k, l].B;
+                        }
+
+                    if (sumR < 0)
+                        sumR = 0;
+                    else if (sumR > 255)
+                        sumR = 255;
+
+                    if (sumG < 0)
+                        sumG = 0;
+                    else if (sumG > 255)
+                        sumG = 255;
+
+                    if (sumB < 0)
+                        sumB = 0;
+                    else if (sumB > 255)
+                        sumB = 255;
+
+                    color = Color.FromArgb((byte)sumR, (byte)sumG, (byte)sumB);
+                    workImage2.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
     }
 }

@@ -1507,9 +1507,11 @@ namespace ComputerVision
             }
 
             if (count == 0)
+            {
                 return -1;
-
-            return (sum / count);
+            }
+            int rez = sum / count;
+            return rez;
         }
     }
 }

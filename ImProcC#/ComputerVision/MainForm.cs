@@ -1423,5 +1423,33 @@ namespace ComputerVision
             workImage.Unlock();
             workImage2.Unlock();
         }
+
+        private void button_split_Click(object sender, EventArgs e)
+        {
+            int prag = int.Parse(textBox_pragSplit.Text);
+
+            Color color;
+
+            workImage.Lock();
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    byte R = color.R;
+                    byte G = color.G;
+                    byte B = color.B;
+
+                    byte average = (byte)((R + G + B) / 3);
+
+                    color = Color.FromArgb(average, average, average);
+
+                    workImage.SetPixel(i, j, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+        }
     }
 }

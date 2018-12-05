@@ -32,6 +32,9 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_Gabor = new System.Windows.Forms.Button();
+            this.button_Frei_Chen = new System.Windows.Forms.Button();
+            this.button_Sobel = new System.Windows.Forms.Button();
             this.button_Kirsch = new System.Windows.Forms.Button();
             this.button_unsharpMasking = new System.Windows.Forms.Button();
             this.button_FTS = new System.Windows.Forms.Button();
@@ -57,9 +60,8 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_Sobel = new System.Windows.Forms.Button();
-            this.button_Frei_Chen = new System.Windows.Forms.Button();
-            this.button_Gabor = new System.Windows.Forms.Button();
+            this.button_split = new System.Windows.Forms.Button();
+            this.textBox_pragSplit = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -101,6 +103,8 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.textBox_pragSplit);
+            this.panel1.Controls.Add(this.button_split);
             this.panel1.Controls.Add(this.button_Gabor);
             this.panel1.Controls.Add(this.button_Frei_Chen);
             this.panel1.Controls.Add(this.button_Sobel);
@@ -133,6 +137,39 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1016, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_Gabor
+            // 
+            this.button_Gabor.Location = new System.Drawing.Point(868, 64);
+            this.button_Gabor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Gabor.Name = "button_Gabor";
+            this.button_Gabor.Size = new System.Drawing.Size(127, 35);
+            this.button_Gabor.TabIndex = 39;
+            this.button_Gabor.Text = "Gabor";
+            this.button_Gabor.UseVisualStyleBackColor = true;
+            this.button_Gabor.Click += new System.EventHandler(this.button_Gabor_Click);
+            // 
+            // button_Frei_Chen
+            // 
+            this.button_Frei_Chen.Location = new System.Drawing.Point(868, 15);
+            this.button_Frei_Chen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Frei_Chen.Name = "button_Frei_Chen";
+            this.button_Frei_Chen.Size = new System.Drawing.Size(127, 35);
+            this.button_Frei_Chen.TabIndex = 38;
+            this.button_Frei_Chen.Text = " Frei-Chen";
+            this.button_Frei_Chen.UseVisualStyleBackColor = true;
+            this.button_Frei_Chen.Click += new System.EventHandler(this.button_Frei_Chen_Click);
+            // 
+            // button_Sobel
+            // 
+            this.button_Sobel.Location = new System.Drawing.Point(717, 112);
+            this.button_Sobel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_Sobel.Name = "button_Sobel";
+            this.button_Sobel.Size = new System.Drawing.Size(127, 35);
+            this.button_Sobel.TabIndex = 37;
+            this.button_Sobel.Text = "Sobel";
+            this.button_Sobel.UseVisualStyleBackColor = true;
+            this.button_Sobel.Click += new System.EventHandler(this.button_Sobel_Click);
             // 
             // button_Kirsch
             // 
@@ -380,38 +417,23 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_Sobel
+            // button_split
             // 
-            this.button_Sobel.Location = new System.Drawing.Point(717, 112);
-            this.button_Sobel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_Sobel.Name = "button_Sobel";
-            this.button_Sobel.Size = new System.Drawing.Size(127, 35);
-            this.button_Sobel.TabIndex = 37;
-            this.button_Sobel.Text = "Sobel";
-            this.button_Sobel.UseVisualStyleBackColor = true;
-            this.button_Sobel.Click += new System.EventHandler(this.button_Sobel_Click);
+            this.button_split.Location = new System.Drawing.Point(868, 112);
+            this.button_split.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_split.Name = "button_split";
+            this.button_split.Size = new System.Drawing.Size(127, 35);
+            this.button_split.TabIndex = 40;
+            this.button_split.Text = "Split by:";
+            this.button_split.UseVisualStyleBackColor = true;
+            this.button_split.Click += new System.EventHandler(this.button_split_Click);
             // 
-            // button_Frei_Chen
+            // textBox_pragSplit
             // 
-            this.button_Frei_Chen.Location = new System.Drawing.Point(868, 15);
-            this.button_Frei_Chen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_Frei_Chen.Name = "button_Frei_Chen";
-            this.button_Frei_Chen.Size = new System.Drawing.Size(127, 35);
-            this.button_Frei_Chen.TabIndex = 38;
-            this.button_Frei_Chen.Text = " Frei-Chen";
-            this.button_Frei_Chen.UseVisualStyleBackColor = true;
-            this.button_Frei_Chen.Click += new System.EventHandler(this.button_Frei_Chen_Click);
-            // 
-            // button_Gabor
-            // 
-            this.button_Gabor.Location = new System.Drawing.Point(868, 64);
-            this.button_Gabor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_Gabor.Name = "button_Gabor";
-            this.button_Gabor.Size = new System.Drawing.Size(127, 35);
-            this.button_Gabor.TabIndex = 39;
-            this.button_Gabor.Text = "Gabor";
-            this.button_Gabor.UseVisualStyleBackColor = true;
-            this.button_Gabor.Click += new System.EventHandler(this.button_Gabor_Click);
+            this.textBox_pragSplit.Location = new System.Drawing.Point(868, 176);
+            this.textBox_pragSplit.Name = "textBox_pragSplit";
+            this.textBox_pragSplit.Size = new System.Drawing.Size(127, 26);
+            this.textBox_pragSplit.TabIndex = 41;
             // 
             // MainForm
             // 
@@ -467,6 +489,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_Sobel;
         private System.Windows.Forms.Button button_Frei_Chen;
         private System.Windows.Forms.Button button_Gabor;
+        private System.Windows.Forms.Button button_split;
+        private System.Windows.Forms.TextBox textBox_pragSplit;
     }
 }
 

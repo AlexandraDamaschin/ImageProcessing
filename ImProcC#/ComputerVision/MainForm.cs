@@ -1466,13 +1466,13 @@ namespace ComputerVision
             if (dev > prag)
             {
                 drawLines(xini, xfin, yini, yfin);
-                int xHalf = (xfin - xini) / 2;
-                int yHalf = (yfin - yini) / 2;
+                int xHalf = (xfin + xini) / 2;
+                int yHalf = (yfin + yini) / 2;
 
                 splitting(xini, xHalf, yini, yHalf);
-                splitting(xHalf + 1, xfin, yini, yHalf);
-                splitting(xini, xHalf, yHalf + 1, yfin);
-                splitting(xHalf + 1, xfin, yHalf + 1, yfin);
+                splitting(xHalf, xfin, yini, yHalf);
+                splitting(xini, xHalf, yHalf, yfin);
+                splitting(xHalf, xfin, yHalf, yfin);
             }
         }
 

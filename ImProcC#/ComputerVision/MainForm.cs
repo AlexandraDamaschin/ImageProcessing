@@ -1424,46 +1424,99 @@ namespace ComputerVision
             workImage2.Unlock();
         }
 
+        int prag;
         private void button_split_Click(object sender, EventArgs e)
         {
-            int prag = int.Parse(textBox_pragSplit.Text);
+            prag = int.Parse(textBox_pragSplit.Text);
 
             workImage.Lock();
             workImage2.Lock();
 
-            average();
-            split();
+            splitting(0, workImage.Width, 0, workImage.Height);
 
             panelDestination.BackgroundImage = null;
-            panelDestination.BackgroundImage = workImage.GetBitMap();
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
 
             workImage.Unlock();
             workImage2.Unlock();
+
         }
 
-        public void split()
+        private void splitting(int xini, int xfin, int yini, int yfin)
         {
-        }
 
-        public void average(int x1, int x2, int y1, int y2)
-        {
-            Color color;
-            for (int i = 0; i < workImage.Width; i++)
+            int sum = 0, count = 0;
+            int averageCol = averageInt(xini, xfin, yini, yfin);
+
+            if (averageCol == -1 || xfin - xini < 2 || yfin - yini < 2)
             {
-                for (int j = 0; j < workImage.Height; j++)
+                return;
+            }
+
+            for (int i = xini; i < xfin; i++)
+            {
+                for (int j = yini; j < yfin; j++)
                 {
-                    color = workImage.GetPixel(i, j);
-                    byte R = color.R;
-                    byte G = color.G;
-                    byte B = color.B;
-
-                    byte average = (byte)((R + G + B) / 3);
-
-                    color = Color.FromArgb(average, average, average);
-
-                    workImage.SetPixel(i, j, color);
+                    Color newColor = workImage.GetPixel(i, j);
+                    int R = newColor.R;
+                    int G = newColor.G;
+                    int B = newColor.B;
+                    int grCol = (R + G + B) / 3;
+                    sum += (grCol - averageCol) * (grCol - averageCol);
+                    count++;
                 }
             }
+
+            int dev = sum / (count - 1);
+
+            if (dev > prag)
+            {
+                drawLines(xini, xfin, yini, yfin);
+                int xHalf = (xfin - xini) / 2;
+                int yHalf = (yfin - yini) / 2;
+
+                splitting(xini, xHalf, yini, yHalf);
+                splitting(xHalf + 1, xfin, yini, yHalf);
+                splitting(xini, xHalf, yHalf + 1, yfin);
+                splitting(xHalf + 1, xfin, yHalf + 1, yfin);
+            }
+        }
+
+        private void drawLines(int xini, int xfin, int yini, int yfin)
+        {
+            for (int i = xini; i < xfin; i++)
+            {
+                workImage2.SetPixel(i, (yini + yfin) / 2, Color.Blue);
+            }
+
+            for (int i = yini; i < yfin; i++)
+            {
+                workImage2.SetPixel((xini + xfin) / 2, i, Color.Blue);
+            }
+        }
+
+
+        private int averageInt(int xini, int xfin, int yini, int yfin)
+        {
+            int sum = 0, count = 0;
+            for (int i = xini; i < xfin; i++)
+            {
+                for (int j = yini; j < yfin; j++)
+                {
+                    Color newColor = workImage.GetPixel(i, j);
+                    int R = newColor.R;
+                    int G = newColor.G;
+                    int B = newColor.B;
+
+                    sum += (R + G + B) / 3;
+                    count++;
+                }
+            }
+
+            if (count == 0)
+                return -1;
+
+            return (sum / count);
         }
     }
 }

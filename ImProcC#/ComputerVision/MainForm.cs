@@ -1439,12 +1439,10 @@ namespace ComputerVision
 
             workImage.Unlock();
             workImage2.Unlock();
-
         }
 
         private void splitting(int xini, int xfin, int yini, int yfin)
         {
-
             int sum = 0, count = 0;
             int averageCol = averageInt(xini, xfin, yini, yfin);
 
@@ -1494,7 +1492,6 @@ namespace ComputerVision
                 workImage2.SetPixel((xini + xfin) / 2, i, Color.Blue);
             }
         }
-
 
         private int averageInt(int xini, int xfin, int yini, int yfin)
         {

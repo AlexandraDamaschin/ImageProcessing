@@ -1428,9 +1428,26 @@ namespace ComputerVision
         {
             int prag = int.Parse(textBox_pragSplit.Text);
 
-            Color color;
-
             workImage.Lock();
+            workImage2.Lock();
+
+            average();
+            split();
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
+
+        public void split()
+        {
+        }
+
+        public void average(int x1, int x2, int y1, int y2)
+        {
+            Color color;
             for (int i = 0; i < workImage.Width; i++)
             {
                 for (int j = 0; j < workImage.Height; j++)
@@ -1447,9 +1464,6 @@ namespace ComputerVision
                     workImage.SetPixel(i, j, color);
                 }
             }
-            panelDestination.BackgroundImage = null;
-            panelDestination.BackgroundImage = workImage.GetBitMap();
-            workImage.Unlock();
         }
     }
 }

@@ -1461,7 +1461,7 @@ namespace ComputerVision
                 }
             }
 
-            int dev = sum / (count - 1);
+            int dev = sum / (count );
 
             if (dev > prag)
             {
@@ -1512,6 +1512,11 @@ namespace ComputerVision
             }
             int rez = sum / count;
             return rez;
+        }
+
+        private void button_corelation_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -32,6 +32,8 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox_pragSplit = new System.Windows.Forms.TextBox();
+            this.button_split = new System.Windows.Forms.Button();
             this.button_Gabor = new System.Windows.Forms.Button();
             this.button_Frei_Chen = new System.Windows.Forms.Button();
             this.button_Sobel = new System.Windows.Forms.Button();
@@ -60,8 +62,7 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_split = new System.Windows.Forms.Button();
-            this.textBox_pragSplit = new System.Windows.Forms.TextBox();
+            this.button_corelation = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -103,6 +104,7 @@ namespace ComputerVision
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button_corelation);
             this.panel1.Controls.Add(this.textBox_pragSplit);
             this.panel1.Controls.Add(this.button_split);
             this.panel1.Controls.Add(this.button_Gabor);
@@ -137,6 +139,24 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1016, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // textBox_pragSplit
+            // 
+            this.textBox_pragSplit.Location = new System.Drawing.Point(868, 176);
+            this.textBox_pragSplit.Name = "textBox_pragSplit";
+            this.textBox_pragSplit.Size = new System.Drawing.Size(127, 26);
+            this.textBox_pragSplit.TabIndex = 41;
+            // 
+            // button_split
+            // 
+            this.button_split.Location = new System.Drawing.Point(868, 112);
+            this.button_split.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_split.Name = "button_split";
+            this.button_split.Size = new System.Drawing.Size(127, 35);
+            this.button_split.TabIndex = 40;
+            this.button_split.Text = "Split by:";
+            this.button_split.UseVisualStyleBackColor = true;
+            this.button_split.Click += new System.EventHandler(this.button_split_Click);
             // 
             // button_Gabor
             // 
@@ -417,23 +437,16 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_split
+            // button_corelation
             // 
-            this.button_split.Location = new System.Drawing.Point(868, 112);
-            this.button_split.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_split.Name = "button_split";
-            this.button_split.Size = new System.Drawing.Size(127, 35);
-            this.button_split.TabIndex = 40;
-            this.button_split.Text = "Split by:";
-            this.button_split.UseVisualStyleBackColor = true;
-            this.button_split.Click += new System.EventHandler(this.button_split_Click);
-            // 
-            // textBox_pragSplit
-            // 
-            this.textBox_pragSplit.Location = new System.Drawing.Point(868, 176);
-            this.textBox_pragSplit.Name = "textBox_pragSplit";
-            this.textBox_pragSplit.Size = new System.Drawing.Size(127, 26);
-            this.textBox_pragSplit.TabIndex = 41;
+            this.button_corelation.Location = new System.Drawing.Point(868, 238);
+            this.button_corelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_corelation.Name = "button_corelation";
+            this.button_corelation.Size = new System.Drawing.Size(127, 35);
+            this.button_corelation.TabIndex = 42;
+            this.button_corelation.Text = "Corelation";
+            this.button_corelation.UseVisualStyleBackColor = true;
+            this.button_corelation.Click += new System.EventHandler(this.button_corelation_Click);
             // 
             // MainForm
             // 
@@ -491,6 +504,7 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_Gabor;
         private System.Windows.Forms.Button button_split;
         private System.Windows.Forms.TextBox textBox_pragSplit;
+        private System.Windows.Forms.Button button_corelation;
     }
 }
 

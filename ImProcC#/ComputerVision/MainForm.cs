@@ -1520,66 +1520,80 @@ namespace ComputerVision
 
         private void button_corelation_Click(object sender, EventArgs e)
         {
-            int template_size = workImageCorelation.Width * workImageCorelation.Height;
-            double sum = 0;
-            double sqrsum = 0;
+
             workImage.Lock();
             workImageCorelation.Lock();
-            for (int i = 0; i < workImageCorelation.Width; i++)
+            
+            int template_size = workImageCorelation.Height * workImageCorelation.Width;
+            int sum = 0;
+            int sqrSum = 0;
+
+            double[,] corr_coeff = new double[workImage.Width, workImage.Height];
+
+            for (int i = 0; i < workImageCorelation.Width - 1; i++)
             {
-                for (int j = 0; j < workImageCorelation.Height; j++)
+                for (int j = 0; j < workImageCorelation.Height - 1; j++)
                 {
-                    double template = Grayscale(workImageCorelation.GetPixel(i, j));
-                    sum += template;
-                    sqrsum += template * template;
+                    int greyCol = Grayscale(workImageCorelation.GetPixel(i, j));
+                    sum += greyCol;
+                    sqrSum += greyCol * greyCol;
                 }
             }
+
             double mean_template = sum / template_size;
-            double var2template = sqrsum - (sum * sum) / template_size;
-            double var2image = 0;
-            double prodsum = 0;
-            int vari = 20;
-            int varj = 25;
-            double[,] corr_coeff = new double[workImage.Width, workImage.Height];
-            for (int i = 0; i < workImage.Width - workImageCorelation.Width; i++)
+            double var2template = sqrSum - (sum * sum) / template_size;
+
+            for (int x = 0; x < workImage.Width - workImageCorelation.Width; x++)
             {
-                for (int j = 0; j < workImage.Height - workImageCorelation.Height; j++)
+                for (int y = 0; y < workImage.Height - workImageCorelation.Height; y++)
                 {
                     sum = 0;
-                    sqrsum = 0;
-                    prodsum = 0;
-                    for (int k = 0; k < workImageCorelation.Width; k++)
-                        for (int m = 0; m < workImageCorelation.Height; m++)
+                    sqrSum = 0;
+                    int prodSum = 0;
+
+                    for (int i = 0; i < workImageCorelation.Width - 1; i++)
+                    {
+                        for (int j = 0; j < workImageCorelation.Height - 1; j++)
                         {
-                            double img = Grayscale(workImage.GetPixel(i + k, j + m));
-                            double template = Grayscale(workImageCorelation.GetPixel(k, m));
-                            sum += img;
-                            sqrsum += img * img;
-                            prodsum += img * template;
+                            int greyCol = Grayscale(workImage.GetPixel(x + i, y + j));
+                            sum += greyCol;
+                            sqrSum += greyCol * greyCol;
+                            prodSum += greyCol * Grayscale(workImageCorelation.GetPixel(i, j));
                         }
-                    var2image = sqrsum - (sum * sum) / template_size;
-                    corr_coeff[i, j] = ((prodsum - (mean_template * sum)) / Math.Sqrt(var2image * var2template));
+                    }
+
+                    double var2image = sqrSum - (sum * sum) / template_size;
+                    corr_coeff[x, y] = (prodSum - (mean_template * sum)) / Math.Sqrt(var2image * var2template);
+
                 }
             }
-            double max = Double.NegativeInfinity;
-            int imax = 0, jmax = 0;
-            for (int i = 0; i < workImage.Width - workImageCorelation.Width; i++)
-                for (int j = 0; j < workImage.Height - workImageCorelation.Height; j++)
-                    if (max < corr_coeff[i, j])
+
+            double max = -2;
+            int iMax = 0, jMax = 0;
+
+            for (int x = 0; x < workImage.Width - workImageCorelation.Width; x++)
+            {
+                for (int y = 0; y < workImage.Height - workImageCorelation.Height; y++)
+                {
+                    if (max < corr_coeff[x, y])
                     {
-                        max = corr_coeff[i, j];
-                        imax = i;
-                        jmax = j;
+                        max = corr_coeff[x, y];
+                        iMax = x;
+                        jMax = y;
                     }
-            for (int i = 0; i < workImageCorelation.Width; i++)
-            {
-                workImage.SetPixel(imax + i, jmax, Color.Blue);
-                workImage.SetPixel(imax + i, jmax + workImageCorelation.Height, Color.Blue);
+                }
             }
-            for (int j = 0; j < workImageCorelation.Height; j++)
+
+            for (int i = 0; i < workImageCorelation.Width - 1; i++)
             {
-                workImage.SetPixel(imax, jmax + j, Color.Blue);
-                workImage.SetPixel(imax + workImageCorelation.Width, jmax + j, Color.Blue);
+                workImage.SetPixel(i + iMax, jMax, Color.Blue);
+                workImage.SetPixel(i + iMax, jMax + workImageCorelation.Height, Color.Blue);
+            }
+
+            for (int j = 0; j < workImageCorelation.Height - 1; j++)
+            {
+                workImage.SetPixel(iMax, j + jMax, Color.Blue);
+                workImage.SetPixel(iMax + workImageCorelation.Width, j + jMax, Color.Blue);
             }
 
             panelSource.BackgroundImage = null;
@@ -1588,9 +1602,9 @@ namespace ComputerVision
             workImageCorelation.Unlock();
         }
 
-        private double Grayscale(Color c)
+        private int Grayscale(Color c)
         {
-            return (double)(c.R + c.G + c.B) / 3;
+            return (c.R + c.G + c.B) / 3;
         }
 
         //load second image

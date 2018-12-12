@@ -63,6 +63,7 @@ namespace ComputerVision
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_corelation = new System.Windows.Forms.Button();
+            this.button_LoadSecondImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -448,11 +449,23 @@ namespace ComputerVision
             this.button_corelation.UseVisualStyleBackColor = true;
             this.button_corelation.Click += new System.EventHandler(this.button_corelation_Click);
             // 
+            // button_LoadSecondImage
+            // 
+            this.button_LoadSecondImage.Location = new System.Drawing.Point(158, 675);
+            this.button_LoadSecondImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_LoadSecondImage.Name = "button_LoadSecondImage";
+            this.button_LoadSecondImage.Size = new System.Drawing.Size(169, 35);
+            this.button_LoadSecondImage.TabIndex = 4;
+            this.button_LoadSecondImage.Text = "Load Second Image";
+            this.button_LoadSecondImage.UseVisualStyleBackColor = true;
+            this.button_LoadSecondImage.Click += new System.EventHandler(this.button_LoadSecondImage_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1551, 728);
+            this.Controls.Add(this.button_LoadSecondImage);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.panelDestination);
@@ -505,6 +518,7 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_split;
         private System.Windows.Forms.TextBox textBox_pragSplit;
         private System.Windows.Forms.Button button_corelation;
+        private System.Windows.Forms.Button button_LoadSecondImage;
     }
 }
 

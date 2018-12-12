@@ -12,7 +12,7 @@ namespace ComputerVision
     public partial class MainForm : Form
     {
         private string sSourceFileName = "";
-        private string sSourceFileNameCorelatie = "";
+        private string sSourceFileNameCorelation = "";
         //image 1
         private FastImage workImage;
         private Bitmap image = null;
@@ -20,8 +20,8 @@ namespace ComputerVision
         private FastImage workImage2;
         private Bitmap image2 = null;
         //corelation image
-        private FastImage workImageCorelatie;
-        private Bitmap imageCorelatie = null;
+        private FastImage workImageCorelation;
+        private Bitmap imageCorelation = null;
 
         public MainForm()
         {
@@ -39,9 +39,6 @@ namespace ComputerVision
             //initialize image 2
             image2 = new Bitmap(sSourceFileName);
             workImage2 = new FastImage(image2);
-            //initialize corelation image
-            imageCorelatie = new Bitmap(sSourceFileName);
-            workImageCorelatie = new FastImage(imageCorelatie);
         }
 
         private void buttonGrayscale_Click(object sender, EventArgs e)
@@ -1523,16 +1520,16 @@ namespace ComputerVision
 
         private void button_corelation_Click(object sender, EventArgs e)
         {
-            int template_size = workImageCorelatie.Width * workImageCorelatie.Height;
+            int template_size = workImageCorelation.Width * workImageCorelation.Height;
             double sum = 0;
             double sqrsum = 0;
             workImage.Lock();
-            workImageCorelatie.Lock();
-            for (int i = 0; i < workImageCorelatie.Width; i++)
+            workImageCorelation.Lock();
+            for (int i = 0; i < workImageCorelation.Width; i++)
             {
-                for (int j = 0; j < workImageCorelatie.Height; j++)
+                for (int j = 0; j < workImageCorelation.Height; j++)
                 {
-                    double template = Grayscale(workImageCorelatie.GetPixel(i, j));
+                    double template = Grayscale(workImageCorelation.GetPixel(i, j));
                     sum += template;
                     sqrsum += template * template;
                 }
@@ -1544,18 +1541,18 @@ namespace ComputerVision
             int vari = 20;
             int varj = 25;
             double[,] corr_coeff = new double[workImage.Width, workImage.Height];
-            for (int i = 0; i < workImage.Width - workImageCorelatie.Width; i++)
+            for (int i = 0; i < workImage.Width - workImageCorelation.Width; i++)
             {
-                for (int j = 0; j < workImage.Height - workImageCorelatie.Height; j++)
+                for (int j = 0; j < workImage.Height - workImageCorelation.Height; j++)
                 {
                     sum = 0;
                     sqrsum = 0;
                     prodsum = 0;
-                    for (int k = 0; k < workImageCorelatie.Width; k++)
-                        for (int m = 0; m < workImageCorelatie.Height; m++)
+                    for (int k = 0; k < workImageCorelation.Width; k++)
+                        for (int m = 0; m < workImageCorelation.Height; m++)
                         {
                             double img = Grayscale(workImage.GetPixel(i + k, j + m));
-                            double template = Grayscale(workImageCorelatie.GetPixel(k, m));
+                            double template = Grayscale(workImageCorelation.GetPixel(k, m));
                             sum += img;
                             sqrsum += img * img;
                             prodsum += img * template;
@@ -1566,29 +1563,29 @@ namespace ComputerVision
             }
             double max = Double.NegativeInfinity;
             int imax = 0, jmax = 0;
-            for (int i = 0; i < workImage.Width - workImageCorelatie.Width; i++)
-                for (int j = 0; j < workImage.Height - workImageCorelatie.Height; j++)
+            for (int i = 0; i < workImage.Width - workImageCorelation.Width; i++)
+                for (int j = 0; j < workImage.Height - workImageCorelation.Height; j++)
                     if (max < corr_coeff[i, j])
                     {
                         max = corr_coeff[i, j];
                         imax = i;
                         jmax = j;
                     }
-            for (int i = 0; i < workImageCorelatie.Width; i++)
+            for (int i = 0; i < workImageCorelation.Width; i++)
             {
                 workImage.SetPixel(imax + i, jmax, Color.Blue);
-                workImage.SetPixel(imax + i, jmax + workImageCorelatie.Height, Color.Blue);
+                workImage.SetPixel(imax + i, jmax + workImageCorelation.Height, Color.Blue);
             }
-            for (int j = 0; j < workImageCorelatie.Height; j++)
+            for (int j = 0; j < workImageCorelation.Height; j++)
             {
                 workImage.SetPixel(imax, jmax + j, Color.Blue);
-                workImage.SetPixel(imax + workImageCorelatie.Width, jmax + j, Color.Blue);
+                workImage.SetPixel(imax + workImageCorelation.Width, jmax + j, Color.Blue);
             }
 
             panelSource.BackgroundImage = null;
             panelSource.BackgroundImage = workImage.GetBitMap();
             workImage.Unlock();
-            workImageCorelatie.Unlock();
+            workImageCorelation.Unlock();
         }
 
         private double Grayscale(Color c)
@@ -1600,10 +1597,10 @@ namespace ComputerVision
         private void button_LoadSecondImage_Click(object sender, EventArgs e)
         {
             openFileDialog.ShowDialog();
-            sSourceFileNameCorelatie = openFileDialog.FileName;
-            imageCorelatie = new Bitmap(sSourceFileNameCorelatie);
-            workImageCorelatie = new FastImage(imageCorelatie);
-            panelDestination.BackgroundImage = workImageCorelatie.GetBitMap();
+            sSourceFileNameCorelation = openFileDialog.FileName;
+            imageCorelation = new Bitmap(sSourceFileNameCorelation);
+            workImageCorelation = new FastImage(imageCorelation);
+            panelDestination.BackgroundImage = workImageCorelation.GetBitMap();
         }
     }
 }

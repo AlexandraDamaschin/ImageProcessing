@@ -465,10 +465,10 @@ namespace ComputerVision
             // 
             // button_BlockMatching
             // 
-            this.button_BlockMatching.Location = new System.Drawing.Point(359, 673);
+            this.button_BlockMatching.Location = new System.Drawing.Point(353, 673);
             this.button_BlockMatching.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button_BlockMatching.Name = "button_BlockMatching";
-            this.button_BlockMatching.Size = new System.Drawing.Size(126, 35);
+            this.button_BlockMatching.Size = new System.Drawing.Size(132, 35);
             this.button_BlockMatching.TabIndex = 15;
             this.button_BlockMatching.Text = "BlockMatching";
             this.button_BlockMatching.UseVisualStyleBackColor = true;

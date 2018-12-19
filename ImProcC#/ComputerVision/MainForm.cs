@@ -1628,9 +1628,12 @@ namespace ComputerVision
             int dx = x2 - x1;
             int dy = y2 - y1;
             if (dx == 0 && dy == 0)
+            {
                 return;
+            }
             double dist = Distance123(x1, y1, x2, y2);
             double m = (double)dy / dx;
+
             if (Math.Abs(dx) > Math.Abs(dy))
             {
                 if (dx > 0)
@@ -1675,7 +1678,7 @@ namespace ComputerVision
             }
         }
 
-        private double grayscale(Color c)
+        private double GrayScale(Color c)
         {
             return (double)(c.R + c.G + c.B) / 3;
         }
@@ -1687,8 +1690,8 @@ namespace ComputerVision
             {
                 for (int m = 0; m < N; m++)
                 {
-                    double c1 = grayscale(first.GetPixel(i + n, j + m));
-                    double c2 = grayscale(second.GetPixel(k + n, l + m));
+                    double c1 = GrayScale(first.GetPixel(i + n, j + m));
+                    double c2 = GrayScale(second.GetPixel(k + n, l + m));
                     double sum = c1 + c2;
                     sad += sum;
                 }
@@ -1698,10 +1701,10 @@ namespace ComputerVision
 
         void BlockMatching()
         {
-            textBox_dimension.Text();
-            textBox_SearchSize.Text();
-            int blockSize = 7;
-            int windowsSize = 5;
+            int blockSize = Int32.Parse(textBox_dimension.Text);
+            int windowsSize = Int32.Parse(textBox_SearchSize.Text);
+            // int blockSize = 7;
+            //int windowsSize = 5;
 
             FastImage workImageFirst = new FastImage((Bitmap)image.Clone());
             workImage = new FastImage((Bitmap)image.Clone());
@@ -1728,7 +1731,7 @@ namespace ComputerVision
                             if (j + l + blockSize >= workImage.Height)
                                 continue;
 
-                            double val = SSD(workImageFirst, i, j, workImage2, i + k, j + l, blockSize);
+                            double val = SAD(workImageFirst, i, j, workImage2, i + k, j + l, blockSize);
                             if (val < min)
                             {
                                 u = k;

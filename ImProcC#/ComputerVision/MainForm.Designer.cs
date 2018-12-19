@@ -65,6 +65,8 @@ namespace ComputerVision
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.button_LoadSecondImage = new System.Windows.Forms.Button();
             this.button_BlockMatching = new System.Windows.Forms.Button();
+            this.textBox_SearchSize = new System.Windows.Forms.TextBox();
+            this.textBox_dimension = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -472,11 +474,27 @@ namespace ComputerVision
             this.button_BlockMatching.UseVisualStyleBackColor = true;
             this.button_BlockMatching.Click += new System.EventHandler(this.button_BlockMatching_Click);
             // 
+            // textBox_SearchSize
+            // 
+            this.textBox_SearchSize.Location = new System.Drawing.Point(359, 639);
+            this.textBox_SearchSize.Name = "textBox_SearchSize";
+            this.textBox_SearchSize.Size = new System.Drawing.Size(56, 26);
+            this.textBox_SearchSize.TabIndex = 31;
+            // 
+            // textBox_dimension
+            // 
+            this.textBox_dimension.Location = new System.Drawing.Point(421, 639);
+            this.textBox_dimension.Name = "textBox_dimension";
+            this.textBox_dimension.Size = new System.Drawing.Size(56, 26);
+            this.textBox_dimension.TabIndex = 32;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1551, 728);
+            this.Controls.Add(this.textBox_dimension);
+            this.Controls.Add(this.textBox_SearchSize);
             this.Controls.Add(this.button_BlockMatching);
             this.Controls.Add(this.button_LoadSecondImage);
             this.Controls.Add(this.panel1);
@@ -491,6 +509,7 @@ namespace ComputerVision
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -533,6 +552,8 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_corelation;
         private System.Windows.Forms.Button button_LoadSecondImage;
         private System.Windows.Forms.Button button_BlockMatching;
+        private System.Windows.Forms.TextBox textBox_SearchSize;
+        private System.Windows.Forms.TextBox textBox_dimension;
     }
 }
 

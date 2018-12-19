@@ -1680,22 +1680,26 @@ namespace ComputerVision
             return (double)(c.R + c.G + c.B) / 3;
         }
 
-        double SSD(FastImage first, int i, int j, FastImage second, int k, int l, int N)
+        double SAD(FastImage first, int i, int j, FastImage second, int k, int l, int N)
         {
-            double ssd = 0;
+            double sad = 0;
             for (int n = 0; n < N; n++)
             {
                 for (int m = 0; m < N; m++)
                 {
                     double c1 = grayscale(first.GetPixel(i + n, j + m));
                     double c2 = grayscale(second.GetPixel(k + n, l + m));
-                    ssd += Math.Pow((c1 - c2), 2);
+                    double sum = c1 + c2;
+                    sad += sum;
                 }
             }
-            return ssd;
+            return sad;
         }
+
         void BlockMatching()
         {
+            textBox_dimension.Text();
+            textBox_SearchSize.Text();
             int blockSize = 7;
             int windowsSize = 5;
 

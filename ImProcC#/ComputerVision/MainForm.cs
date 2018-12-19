@@ -1620,17 +1620,18 @@ namespace ComputerVision
         private void button_BlockMatching_Click(object sender, EventArgs e)
         {
             BlockMatching();
-
         }
 
         private void DrawLine(int x1, int y1, int x2, int y2, FastImage img)
         {
             int dx = x2 - x1;
             int dy = y2 - y1;
+
             if (dx == 0 && dy == 0)
             {
                 return;
             }
+
             double dist = Distance123(x1, y1, x2, y2);
             double m = (double)dy / dx;
 
@@ -1642,7 +1643,7 @@ namespace ComputerVision
                     {
                         double y = m * x;
                         double t = Distance123(x1, y1, x + x1, y + y1) / dist;
-                        img.SetPixel(x + x1, (int)y + y1, Color.Red);
+                        img.SetPixel(x + x1, (int)y + y1, Color.Blue);
                     }
                 }
                 else
@@ -1651,10 +1652,11 @@ namespace ComputerVision
                     {
                         double y = m * x;
                         double t = Distance123(x1, y1, x + x1, y + y1) / dist;
-                        img.SetPixel(x + x1, (int)y + y1, Color.Red);
+                        img.SetPixel(x + x1, (int)y + y1, Color.Blue);
                     }
                 }
             }
+
             else
             {
                 if (dy > 0)
@@ -1663,7 +1665,7 @@ namespace ComputerVision
                     {
                         double x = y / m;
                         double t = Distance123(x1, y1, x + x1, y + y1) / dist;
-                        img.SetPixel((int)x + x1, y + y1, Color.Red);
+                        img.SetPixel((int)x + x1, y + y1, Color.Blue);
                     }
                 }
                 else
@@ -1672,7 +1674,7 @@ namespace ComputerVision
                     {
                         double x = y / m;
                         double t = Distance123(x1, y1, x + x1, y + y1) / dist;
-                        img.SetPixel((int)x + x1, y + y1, Color.Red);
+                        img.SetPixel((int)x + x1, y + y1, Color.Blue);
                     }
                 }
             }
@@ -1701,14 +1703,11 @@ namespace ComputerVision
 
         void BlockMatching()
         {
-            int blockSize = Int32.Parse(textBox_dimension.Text);
-            int windowsSize = Int32.Parse(textBox_SearchSize.Text);
-            // int blockSize = 7;
-            //int windowsSize = 5;
+            int blockSize = int.Parse(textBox_dimension.Text);
+            int windowsSize = int.Parse(textBox_SearchSize.Text);
 
             FastImage workImageFirst = new FastImage((Bitmap)image.Clone());
             workImage = new FastImage((Bitmap)image.Clone());
-
 
             workImage.Lock();
             workImage2.Lock();
@@ -1731,12 +1730,12 @@ namespace ComputerVision
                             if (j + l + blockSize >= workImage.Height)
                                 continue;
 
-                            double val = SAD(workImageFirst, i, j, workImage2, i + k, j + l, blockSize);
-                            if (val < min)
+                            double prag = SAD(workImageFirst, i, j, workImage2, i + k, j + l, blockSize);
+                            if (prag < min)
                             {
                                 u = k;
                                 v = l;
-                                min = val;
+                                min = prag;
                             }
                         }
                     }
@@ -1750,7 +1749,6 @@ namespace ComputerVision
 
             workImage2.Unlock();
             workImageFirst.Unlock();
-
         }
 
         private double Distance123(double x1, double y1, double x2, double y2)

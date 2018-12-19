@@ -32,6 +32,7 @@ namespace ComputerVision
             this.panelDestination = new System.Windows.Forms.Panel();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_corelation = new System.Windows.Forms.Button();
             this.textBox_pragSplit = new System.Windows.Forms.TextBox();
             this.button_split = new System.Windows.Forms.Button();
             this.button_Gabor = new System.Windows.Forms.Button();
@@ -62,8 +63,8 @@ namespace ComputerVision
             this.button_negativizare = new System.Windows.Forms.Button();
             this.buttonGrayscale = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button_corelation = new System.Windows.Forms.Button();
             this.button_LoadSecondImage = new System.Windows.Forms.Button();
+            this.button_BlockMatching = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -140,6 +141,17 @@ namespace ComputerVision
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1016, 291);
             this.panel1.TabIndex = 3;
+            // 
+            // button_corelation
+            // 
+            this.button_corelation.Location = new System.Drawing.Point(868, 238);
+            this.button_corelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_corelation.Name = "button_corelation";
+            this.button_corelation.Size = new System.Drawing.Size(127, 35);
+            this.button_corelation.TabIndex = 42;
+            this.button_corelation.Text = "Corelation";
+            this.button_corelation.UseVisualStyleBackColor = true;
+            this.button_corelation.Click += new System.EventHandler(this.button_corelation_Click);
             // 
             // textBox_pragSplit
             // 
@@ -438,17 +450,6 @@ namespace ComputerVision
             this.buttonGrayscale.UseVisualStyleBackColor = true;
             this.buttonGrayscale.Click += new System.EventHandler(this.buttonGrayscale_Click);
             // 
-            // button_corelation
-            // 
-            this.button_corelation.Location = new System.Drawing.Point(868, 238);
-            this.button_corelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button_corelation.Name = "button_corelation";
-            this.button_corelation.Size = new System.Drawing.Size(127, 35);
-            this.button_corelation.TabIndex = 42;
-            this.button_corelation.Text = "Corelation";
-            this.button_corelation.UseVisualStyleBackColor = true;
-            this.button_corelation.Click += new System.EventHandler(this.button_corelation_Click);
-            // 
             // button_LoadSecondImage
             // 
             this.button_LoadSecondImage.Location = new System.Drawing.Point(158, 675);
@@ -460,11 +461,23 @@ namespace ComputerVision
             this.button_LoadSecondImage.UseVisualStyleBackColor = true;
             this.button_LoadSecondImage.Click += new System.EventHandler(this.button_LoadSecondImage_Click);
             // 
+            // button_BlockMatching
+            // 
+            this.button_BlockMatching.Location = new System.Drawing.Point(359, 673);
+            this.button_BlockMatching.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_BlockMatching.Name = "button_BlockMatching";
+            this.button_BlockMatching.Size = new System.Drawing.Size(126, 35);
+            this.button_BlockMatching.TabIndex = 15;
+            this.button_BlockMatching.Text = "BlockMatching";
+            this.button_BlockMatching.UseVisualStyleBackColor = true;
+            this.button_BlockMatching.Click += new System.EventHandler(this.button_BlockMatching_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1551, 728);
+            this.Controls.Add(this.button_BlockMatching);
             this.Controls.Add(this.button_LoadSecondImage);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonLoad);
@@ -519,6 +532,7 @@ namespace ComputerVision
         private System.Windows.Forms.TextBox textBox_pragSplit;
         private System.Windows.Forms.Button button_corelation;
         private System.Windows.Forms.Button button_LoadSecondImage;
+        private System.Windows.Forms.Button button_BlockMatching;
     }
 }
 

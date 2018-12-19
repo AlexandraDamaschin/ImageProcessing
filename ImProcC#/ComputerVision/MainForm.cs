@@ -1523,7 +1523,7 @@ namespace ComputerVision
 
             workImage.Lock();
             workImageCorelation.Lock();
-            
+
             int template_size = workImageCorelation.Height * workImageCorelation.Width;
             int sum = 0;
             int sqrSum = 0;
@@ -1615,6 +1615,140 @@ namespace ComputerVision
             imageCorelation = new Bitmap(sSourceFileNameCorelation);
             workImageCorelation = new FastImage(imageCorelation);
             panelDestination.BackgroundImage = workImageCorelation.GetBitMap();
+        }
+
+        private void button_BlockMatching_Click(object sender, EventArgs e)
+        {
+            BlockMatching();
+
+        }
+
+        private void DrawLine(int x1, int y1, int x2, int y2, FastImage img)
+        {
+            int dx = x2 - x1;
+            int dy = y2 - y1;
+            if (dx == 0 && dy == 0)
+                return;
+            double dist = Distance123(x1, y1, x2, y2);
+            double m = (double)dy / dx;
+            if (Math.Abs(dx) > Math.Abs(dy))
+            {
+                if (dx > 0)
+                {
+                    for (int x = 0; x <= dx; ++x)
+                    {
+                        double y = m * x;
+                        double t = Distance123(x1, y1, x + x1, y + y1) / dist;
+                        img.SetPixel(x + x1, (int)y + y1, Color.Red);
+                    }
+                }
+                else
+                {
+                    for (int x = 0; x >= dx; --x)
+                    {
+                        double y = m * x;
+                        double t = Distance123(x1, y1, x + x1, y + y1) / dist;
+                        img.SetPixel(x + x1, (int)y + y1, Color.Red);
+                    }
+                }
+            }
+            else
+            {
+                if (dy > 0)
+                {
+                    for (int y = 0; y <= dy; ++y)
+                    {
+                        double x = y / m;
+                        double t = Distance123(x1, y1, x + x1, y + y1) / dist;
+                        img.SetPixel((int)x + x1, y + y1, Color.Red);
+                    }
+                }
+                else
+                {
+                    for (int y = 0; y >= dy; --y)
+                    {
+                        double x = y / m;
+                        double t = Distance123(x1, y1, x + x1, y + y1) / dist;
+                        img.SetPixel((int)x + x1, y + y1, Color.Red);
+                    }
+                }
+            }
+        }
+
+        private double grayscale(Color c)
+        {
+            return (double)(c.R + c.G + c.B) / 3;
+        }
+
+        double SSD(FastImage first, int i, int j, FastImage second, int k, int l, int N)
+        {
+            double ssd = 0;
+            for (int n = 0; n < N; n++)
+            {
+                for (int m = 0; m < N; m++)
+                {
+                    double c1 = grayscale(first.GetPixel(i + n, j + m));
+                    double c2 = grayscale(second.GetPixel(k + n, l + m));
+                    ssd += Math.Pow((c1 - c2), 2);
+                }
+            }
+            return ssd;
+        }
+        void BlockMatching()
+        {
+            int blockSize = 7;
+            int windowsSize = 5;
+
+            FastImage workImageFirst = new FastImage((Bitmap)image.Clone());
+            workImage = new FastImage((Bitmap)image.Clone());
+
+
+            workImage.Lock();
+            workImage2.Lock();
+            workImageFirst.Lock();
+
+            for (int i = 0; i < workImage.Width; i += blockSize)
+            {
+                for (int j = 0; j < workImage.Height; j += blockSize)
+                {
+                    double min = double.MaxValue;
+                    int u = 0, v = 0;
+                    for (int k = -windowsSize; k <= windowsSize; k++)
+                    {
+                        for (int l = -windowsSize; l <= windowsSize; l++)
+                        {
+                            if (i + k < 0 || j + l < 0)
+                                continue;
+                            if (i + k + blockSize >= workImage.Width)
+                                continue;
+                            if (j + l + blockSize >= workImage.Height)
+                                continue;
+
+                            double val = SSD(workImageFirst, i, j, workImage2, i + k, j + l, blockSize);
+                            if (val < min)
+                            {
+                                u = k;
+                                v = l;
+                                min = val;
+                            }
+                        }
+                    }
+                    DrawLine(i, j, i + u, j + v, workImage);
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage.GetBitMap();
+            workImage.Unlock();
+
+            workImage2.Unlock();
+            workImageFirst.Unlock();
+
+        }
+
+        private double Distance123(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         }
     }
 }

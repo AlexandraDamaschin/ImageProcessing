@@ -1755,5 +1755,44 @@ namespace ComputerVision
         {
             return Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
         }
+
+        private void button_translation_afina_Click(object sender, EventArgs e)
+        {
+            int[,] A = new int[,]
+            {
+                { 1, 0 },
+                { 0, 1 }
+            };
+            int x = Int32.Parse(textBox_trans_afinaB1.Text.ToString());
+            int y = Int32.Parse(textBox_trans_afinaB2.Text.ToString());
+            int[] B = new int[] { x, y };
+            Color color;
+
+            workImage.Lock();
+            workImage2.Lock();
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    workImage2.SetPixel(i, j, Color.Black);
+                }
+            }
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    int newX = 1 * i + B[0];
+                    int newY = 1 * j + B[1];
+                    if (newX < workImage.Width && newY < workImage.Height)
+                        if (newX > 0 && newY > 0)
+                            workImage2.SetPixel(newX, newY, color);
+                }
+            }
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
     }
 }

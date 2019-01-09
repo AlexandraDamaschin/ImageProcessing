@@ -67,6 +67,9 @@ namespace ComputerVision
             this.button_BlockMatching = new System.Windows.Forms.Button();
             this.textBox_SearchSize = new System.Windows.Forms.TextBox();
             this.textBox_dimension = new System.Windows.Forms.TextBox();
+            this.button_translation_afina = new System.Windows.Forms.Button();
+            this.textBox_trans_afinaB1 = new System.Windows.Forms.TextBox();
+            this.textBox_trans_afinaB2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -488,11 +491,39 @@ namespace ComputerVision
             this.textBox_dimension.Size = new System.Drawing.Size(56, 26);
             this.textBox_dimension.TabIndex = 32;
             // 
+            // button_translation_afina
+            // 
+            this.button_translation_afina.Location = new System.Drawing.Point(353, 596);
+            this.button_translation_afina.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_translation_afina.Name = "button_translation_afina";
+            this.button_translation_afina.Size = new System.Drawing.Size(132, 35);
+            this.button_translation_afina.TabIndex = 33;
+            this.button_translation_afina.Text = "Translation";
+            this.button_translation_afina.UseVisualStyleBackColor = true;
+            this.button_translation_afina.Click += new System.EventHandler(this.button_translation_afina_Click);
+            // 
+            // textBox_trans_afinaB1
+            // 
+            this.textBox_trans_afinaB1.Location = new System.Drawing.Point(359, 562);
+            this.textBox_trans_afinaB1.Name = "textBox_trans_afinaB1";
+            this.textBox_trans_afinaB1.Size = new System.Drawing.Size(56, 26);
+            this.textBox_trans_afinaB1.TabIndex = 34;
+            // 
+            // textBox_trans_afinaB2
+            // 
+            this.textBox_trans_afinaB2.Location = new System.Drawing.Point(421, 562);
+            this.textBox_trans_afinaB2.Name = "textBox_trans_afinaB2";
+            this.textBox_trans_afinaB2.Size = new System.Drawing.Size(56, 26);
+            this.textBox_trans_afinaB2.TabIndex = 35;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1551, 728);
+            this.Controls.Add(this.textBox_trans_afinaB2);
+            this.Controls.Add(this.textBox_trans_afinaB1);
+            this.Controls.Add(this.button_translation_afina);
             this.Controls.Add(this.textBox_dimension);
             this.Controls.Add(this.textBox_SearchSize);
             this.Controls.Add(this.button_BlockMatching);
@@ -554,6 +585,9 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_BlockMatching;
         private System.Windows.Forms.TextBox textBox_SearchSize;
         private System.Windows.Forms.TextBox textBox_dimension;
+        private System.Windows.Forms.Button button_translation_afina;
+        private System.Windows.Forms.TextBox textBox_trans_afinaB1;
+        private System.Windows.Forms.TextBox textBox_trans_afinaB2;
     }
 }
 

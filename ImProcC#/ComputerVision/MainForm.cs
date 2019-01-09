@@ -1786,6 +1786,7 @@ namespace ComputerVision
                     color = workImage.GetPixel(i, j);
                     int newX = 1 * i + B[0];
                     int newY = 1 * j + B[1];
+
                     if (newX < workImage.Width && newY < workImage.Height)
                     {
                         if (newX > 0 && newY > 0)
@@ -1795,10 +1796,89 @@ namespace ComputerVision
                     }
                 }
             }
+
             panelDestination.BackgroundImage = null;
             panelDestination.BackgroundImage = workImage2.GetBitMap();
             workImage.Unlock();
             workImage2.Unlock();
+        }
+
+        private void button_rotation_afina_Click(object sender, EventArgs e)
+        {
+            double theta = int.Parse(textBox_tetha_afina.Text.ToString());
+            theta = (theta * Math.PI) / 180;
+            double[,] A = new double[,] {
+                { Math.Cos(theta), -Math.Sin(theta) },
+                { Math.Sin(theta), Math.Cos(theta) }
+            };
+            bool[,] matrice;
+            Color color;
+
+            workImage.Lock();
+            workImage2.Lock();
+
+            matrice = new bool[workImage.Width, workImage.Height];
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    workImage2.SetPixel(i, j, Color.Black);
+                    matrice[i, j] = false;
+                }
+            }
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    color = workImage.GetPixel(i, j);
+                    double newX = A[0, 0] * i + A[0, 1] * j;
+                    double newY = A[1, 0] * i + A[1, 1] * j;
+                    if (newX < workImage.Width && newY < workImage.Height)
+                    {
+                        if (newX > 0 && newY > 0)
+                        {
+                            workImage2.SetPixel((int)newX, (int)newY, color);
+                            matrice[(int)newX, (int)newY] = true;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < workImage.Width; i++)
+            {
+                for (int j = 0; j < workImage.Height; j++)
+                {
+                    if (matrice[i, j] == false)
+                    {
+                        if (i > 0 && j > 0 && i < workImage.Width - 1 && j < workImage.Height - 1)
+                        {
+                            if (matrice[i - 1, j] == true || matrice[i, j - 1] == true || matrice[i + 1, j] == true || matrice[i, j + 1] == true)
+                            {
+                                if (matrice[i - 1, j] == true)
+                                    workImage2.SetPixel(i, j, workImage2.GetPixel(i - 1, j));
+                                if (matrice[i + 1, j] == true)
+                                    workImage2.SetPixel(i, j, workImage2.GetPixel(i + 1, j));
+                                if (matrice[i, j - 1] == true)
+                                    workImage2.SetPixel(i, j, workImage2.GetPixel(i, j - 1));
+                                if (matrice[i, j + 1] == true)
+                                    workImage2.SetPixel(i, j, workImage2.GetPixel(i, j + 1));
+                            }
+                        }
+                    }
+                }
+            }
+
+            panelDestination.BackgroundImage = null;
+            panelDestination.BackgroundImage = workImage2.GetBitMap();
+            workImage.Unlock();
+            workImage2.Unlock();
+        }
+
+        private void button_scalation_afina_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

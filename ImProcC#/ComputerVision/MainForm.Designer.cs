@@ -70,6 +70,11 @@ namespace ComputerVision
             this.button_translation_afina = new System.Windows.Forms.Button();
             this.textBox_trans_afinaB1 = new System.Windows.Forms.TextBox();
             this.textBox_trans_afinaB2 = new System.Windows.Forms.TextBox();
+            this.button_rotation_afina = new System.Windows.Forms.Button();
+            this.textBox_tetha_afina = new System.Windows.Forms.TextBox();
+            this.button_scalation_afina = new System.Windows.Forms.Button();
+            this.textBox_scalation_afinaA11 = new System.Windows.Forms.TextBox();
+            this.textBox_scalation_afinaA22 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2_contrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1_luminozitate)).BeginInit();
@@ -516,11 +521,59 @@ namespace ComputerVision
             this.textBox_trans_afinaB2.Size = new System.Drawing.Size(56, 26);
             this.textBox_trans_afinaB2.TabIndex = 35;
             // 
+            // button_rotation_afina
+            // 
+            this.button_rotation_afina.Location = new System.Drawing.Point(353, 519);
+            this.button_rotation_afina.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_rotation_afina.Name = "button_rotation_afina";
+            this.button_rotation_afina.Size = new System.Drawing.Size(132, 35);
+            this.button_rotation_afina.TabIndex = 36;
+            this.button_rotation_afina.Text = "Rotation";
+            this.button_rotation_afina.UseVisualStyleBackColor = true;
+            this.button_rotation_afina.Click += new System.EventHandler(this.button_rotation_afina_Click);
+            // 
+            // textBox_tetha_afina
+            // 
+            this.textBox_tetha_afina.Location = new System.Drawing.Point(359, 482);
+            this.textBox_tetha_afina.Name = "textBox_tetha_afina";
+            this.textBox_tetha_afina.Size = new System.Drawing.Size(118, 26);
+            this.textBox_tetha_afina.TabIndex = 37;
+            // 
+            // button_scalation_afina
+            // 
+            this.button_scalation_afina.Location = new System.Drawing.Point(353, 439);
+            this.button_scalation_afina.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button_scalation_afina.Name = "button_scalation_afina";
+            this.button_scalation_afina.Size = new System.Drawing.Size(132, 35);
+            this.button_scalation_afina.TabIndex = 38;
+            this.button_scalation_afina.Text = "Scalation";
+            this.button_scalation_afina.UseVisualStyleBackColor = true;
+            this.button_scalation_afina.Click += new System.EventHandler(this.button_scalation_afina_Click);
+            // 
+            // textBox_scalation_afinaA11
+            // 
+            this.textBox_scalation_afinaA11.Location = new System.Drawing.Point(359, 405);
+            this.textBox_scalation_afinaA11.Name = "textBox_scalation_afinaA11";
+            this.textBox_scalation_afinaA11.Size = new System.Drawing.Size(56, 26);
+            this.textBox_scalation_afinaA11.TabIndex = 39;
+            // 
+            // textBox_scalation_afinaA22
+            // 
+            this.textBox_scalation_afinaA22.Location = new System.Drawing.Point(421, 405);
+            this.textBox_scalation_afinaA22.Name = "textBox_scalation_afinaA22";
+            this.textBox_scalation_afinaA22.Size = new System.Drawing.Size(56, 26);
+            this.textBox_scalation_afinaA22.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1551, 728);
+            this.Controls.Add(this.textBox_scalation_afinaA22);
+            this.Controls.Add(this.textBox_scalation_afinaA11);
+            this.Controls.Add(this.button_scalation_afina);
+            this.Controls.Add(this.textBox_tetha_afina);
+            this.Controls.Add(this.button_rotation_afina);
             this.Controls.Add(this.textBox_trans_afinaB2);
             this.Controls.Add(this.textBox_trans_afinaB1);
             this.Controls.Add(this.button_translation_afina);
@@ -588,6 +641,11 @@ namespace ComputerVision
         private System.Windows.Forms.Button button_translation_afina;
         private System.Windows.Forms.TextBox textBox_trans_afinaB1;
         private System.Windows.Forms.TextBox textBox_trans_afinaB2;
+        private System.Windows.Forms.Button button_rotation_afina;
+        private System.Windows.Forms.TextBox textBox_tetha_afina;
+        private System.Windows.Forms.Button button_scalation_afina;
+        private System.Windows.Forms.TextBox textBox_scalation_afinaA11;
+        private System.Windows.Forms.TextBox textBox_scalation_afinaA22;
     }
 }
 
